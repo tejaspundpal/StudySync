@@ -1,0 +1,38 @@
+package services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.management.relation.Role;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.studysync.entities.Student;
+import com.studysync.entities.Teacher;
+import com.studysync.entities.USER_ROLE;
+import com.studysync.repository.StudentRepository;
+import com.studysync.repository.TeacherRepository;
+
+@Service
+public class StudentUserDetailsService implements UserDetailsService {
+	
+	@Autowired
+	private StudentRepository studentRepository;
+	@Autowired
+	private TeacherRepository teacherRepository;
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+		
+		
+		
+		return null;
+	}
+
+}

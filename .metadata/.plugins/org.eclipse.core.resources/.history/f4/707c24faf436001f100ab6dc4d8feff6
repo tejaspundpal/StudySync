@@ -1,0 +1,29 @@
+package com.fileupload.controllers;
+@RestController
+@RequestMapping("/api/files")
+@CrossOrigin(origins = "http://localhost:3000") // Adjust according to your frontend URL
+public class FileUploadController {
+    @Autowired
+    private FileUploadService service;
+
+    @PostMapping("/upload")
+    public ResponseEntity<FileUpload> uploadFile(@RequestParam("file") MultipartFile file,
+                                                 @RequestParam("teacherName") String teacherName,
+                                                 @RequestParam("subject") String subject,
+                                                 @RequestParam("description") String description) throws IOException {
+        return new ResponseEntity<>(service.saveFile(file, teacherName, subject, description), HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public List<FileUpload> getAllFiles() {
+        return service.getAllFiles();
+    }
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<byte[]> downloadFile(@PathVariable Long id) {
+        FileUpload fileUpload = service.getAllFiles().stream().filter(f -> f.getId().equals(id)).findFirst().orElse(null);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileUpload.getFileName() + "\"")
+                .body(fileUpload.getFileData());
+    }
+}

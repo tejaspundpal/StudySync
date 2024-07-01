@@ -1,0 +1,18 @@
+package entities;
+
+@Entity
+@Data
+public class FileUpload {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String teacherName;
+    private String subject;
+    private String description;
+    private String fileName;
+    private LocalDate uploadDate;
+
+    @Lob
+    private byte[] fileData;
+}

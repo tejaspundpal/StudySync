@@ -1,0 +1,5 @@
+package com.studysync.repository;
+
+public class StudentRepository {
+
+}

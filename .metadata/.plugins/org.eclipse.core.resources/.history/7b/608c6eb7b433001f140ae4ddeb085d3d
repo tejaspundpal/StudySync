@@ -1,0 +1,13 @@
+package com.studysync.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.studysync.entities.Teacher;
+
+public interface TeacherRepository extends JpaRepository<Teacher,String> {
+
+	public Teacher findByEmail(String username);
+
+}
+
+

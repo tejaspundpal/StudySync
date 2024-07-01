@@ -1,0 +1,22 @@
+package com.fileupload.services;
+@Service
+public class FileUploadService {
+    @Autowired
+    private FileUploadRepository repository;
+
+    public FileUpload saveFile(MultipartFile file, String teacherName, String subject, String description) throws IOException {
+        FileUpload fileUpload = new FileUpload();
+        fileUpload.setTeacherName(teacherName);
+        fileUpload.setSubject(subject);
+        fileUpload.setDescription(description);
+        fileUpload.setFileName(file.getOriginalFilename());
+        fileUpload.setFileData(file.getBytes());
+        fileUpload.setUploadDate(LocalDate.now());
+
+        return repository.save(fileUpload);
+    }
+
+    public List<FileUpload> getAllFiles() {
+        return repository.findAll();
+    }
+}

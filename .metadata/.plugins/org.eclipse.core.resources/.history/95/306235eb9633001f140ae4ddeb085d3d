@@ -1,0 +1,38 @@
+package com.studysync.config;
+
+import java.io.IOException;
+
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class JwtTokenValidator extends OncePerRequestFilter {
+
+	@Override
+	public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws IOException, ServletException {
+		// TODO Auto-generated method stub
+		String jwt = request.getHeader(JwtConstant.JWT_HEADER);
+		
+		if(jwt != null) {
+			jwt = jwt.substring(7);
+			
+			try {
+				
+			} catch (Exception e) {
+				throw new BadCredentialsException("Invalid Token..!");
+			}
+		}
+		
+		filterChain.doFilter(request, response);
+
+	}
+
+}

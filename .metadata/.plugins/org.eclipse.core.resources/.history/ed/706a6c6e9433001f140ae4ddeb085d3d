@@ -1,0 +1,8 @@
+package com.studysync.config;
+
+public class JwtConstant {
+
+	public static final String SECRET_KEY = "stpnnncbdvtyrioldmnfgfghjkdndnjdkdjyftrweeqdacvbcnfkj";
+	
+	public static final String 	JWT_HEADER = "Authorization";
+}

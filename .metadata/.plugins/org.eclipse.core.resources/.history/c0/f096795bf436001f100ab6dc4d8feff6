@@ -1,0 +1,5 @@
+package com.fileupload.repository;
+
+public interface FileUploadRepository {
+
+}
