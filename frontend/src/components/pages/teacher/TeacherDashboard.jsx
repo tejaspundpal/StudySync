@@ -1,8 +1,15 @@
 import React from 'react'
+import TeacherNavbar from './TeacherNavbar'
+import Footer from '../../Footer'
+import TeacherHome from './TeacherHome'
 
 const TeacherDashboard = () => {
   return (
-    <div>TeacherDashboard</div>
+    <>
+    <TeacherNavbar/>
+    <TeacherHome/>
+    <Footer/>
+    </>
   )
 }
 

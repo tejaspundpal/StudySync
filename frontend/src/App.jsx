@@ -11,6 +11,8 @@ import Loader from "./components/Loader";
 import StudentDashboard from "./components/pages/student/StudentDashboard";
 import ExploreFriends from "./components/pages/student/ExploreFriends";
 import TeacherDashboard from "./components/pages/teacher/TeacherDashboard";
+import TeacherNotes from "./components/pages/teacher/TeacherNotes";
+import StudentProfile from "./components/pages/student/StudentProfile";
 
 function App() {
 
@@ -25,8 +27,10 @@ function App() {
           <Route path="/student-register" element={<StudentRegister/>} />
           <Route path="/teacher-register" element={<TeacherRegister/>} />
           <Route path="/student/dashboard" element={<StudentDashboard/>} />
+          <Route path="/student/profile" element={<StudentProfile/>} />
           <Route path="/student/explore-friends" element={<ExploreFriends/>} />
           <Route path="/teacher/dashboard" element={<TeacherDashboard/>} />
+          <Route path="/teacher/notes" element={<TeacherNotes/>} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

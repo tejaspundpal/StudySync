@@ -1,0 +1,9 @@
+package com.studysync.services;
+
+import com.studysync.dto.StudentDTO;
+
+public interface StudentService {
+
+	String addStudent(StudentDTO studentDTO);
+	
+}

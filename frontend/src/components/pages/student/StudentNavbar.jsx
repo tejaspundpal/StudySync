@@ -1,31 +1,38 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import logo from '../../../assets/images/StudySync.png'
-import { NavLink } from 'react-router-dom'
-
+import React, { Fragment } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import logo from '../../../assets/images/StudySync.png';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const user = {
   name: 'Tejas',
   email: 'tejas@gmail.com',
   imageUrl:
     'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fuser-icon&psig=AOvVaw0yilBJh2aJauC0206tztw3&ust=1718517770390000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCND92tr33IYDFQAAAAAdAAAAABAE',
-}
+};
+
 const navigation = [
   { name: 'Dashboard', href: '/student/dashboard', current: true },
   { name: 'Notes', href: '/student/notes', current: false },
   { name: 'Quiz', href: '/student/quiz', current: false },
-]
+];
+
 const userNavigation = [
   { name: 'Your Profile', href: '/student/profile' },
   { name: 'Sign out', href: '/logout' },
-]
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function StudentNavbar() {
+  const navigate = useNavigate();
+
+  const handleProfile = () => {
+    navigate('/student/profile'); 
+  };
+
   return (
     <>
       <Disclosure as="nav" className="bg-white shadow-lg sticky top-0 z-50">
@@ -35,11 +42,8 @@ export default function StudentNavbar() {
               <div className="flex h-16 items-center justify-between">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <NavLink to='/student/dashboard'><img
-                      className="h-12 w-auto"
-                      src={logo}
-                      alt="logo"
-                    />
+                    <NavLink to="/student/dashboard">
+                      <img className="h-12 w-auto" src={logo} alt="logo" />
                     </NavLink>
                   </div>
                   <div className="hidden md:block">
@@ -49,7 +53,9 @@ export default function StudentNavbar() {
                           key={item.name}
                           to={item.href}
                           aria-current={item.current ? 'page' : undefined}
-                          className={'text-purple-900 hover:bg-purple-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'}
+                          className={
+                            'text-purple-900 hover:bg-purple-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                          }
                         >
                           {item.name}
                         </NavLink>
@@ -80,15 +86,16 @@ export default function StudentNavbar() {
                           {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
                               {({ active }) => (
-                                <a
-                                  href={item.href}
+                                <NavLink
+                                  to={item.href}
+                                  onClick={item.name === 'Your Profile' ? handleProfile : null}
                                   className={classNames(
                                     active ? 'bg-purple-100' : '',
                                     'block px-4 py-2 text-sm text-purple-700'
                                   )}
                                 >
                                   {item.name}
-                                </a>
+                                </NavLink>
                               )}
                             </Menu.Item>
                           ))}
@@ -119,7 +126,8 @@ export default function StudentNavbar() {
                     key={item.name}
                     as="a"
                     href={item.href}
-                    className={'text-purple-900 hover:bg-purple-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
+                    className={
+                      'text-purple-900 hover:bg-purple-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
                     }
                     aria-current={item.current ? 'page' : undefined}
                   >
@@ -135,7 +143,7 @@ export default function StudentNavbar() {
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-purple-700">{user.name}</div>
                     <div className="text-sm font-medium leading-none text-purple-700">{user.email}</div>
-                  </div>                  
+                  </div>
                 </div>
                 <div className="mt-3 space-y-1 px-2">
                   {userNavigation.map((item) => (
@@ -144,6 +152,7 @@ export default function StudentNavbar() {
                       as="a"
                       href={item.href}
                       className="block rounded-md px-3 py-2 text-base font-medium text-purple-700 hover:text-white hover:bg-purple-700"
+                      onClick={item.name === 'Your Profile' ? handleProfile : null}
                     >
                       {item.name}
                     </Disclosure.Button>
@@ -155,5 +164,5 @@ export default function StudentNavbar() {
         )}
       </Disclosure>
     </>
-  )
+  );
 }

@@ -73,7 +73,7 @@ export default function Footer() {
     </div>
 
     <div
-      className="bg-purple-400 p-4 text-center text-neutral-800">
+      className="bg-purple-300 p-4 text-center text-neutral-800">
       ©{currentYear} Copyright :
       <a
         className="text-neutral-800"

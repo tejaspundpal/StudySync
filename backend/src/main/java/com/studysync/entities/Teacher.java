@@ -1,6 +1,6 @@
 package com.studysync.entities;
 
-import java.util.*;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -15,19 +15,16 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="TEACHER")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Teacher {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-	@Column(unique = true)
+    private int teacherid;
+	
+	@Column(name = "tid",unique = true)
 	private String tid;
 	private String firstname;
 	private String lastname;
@@ -35,17 +32,15 @@ public class Teacher {
 	@Column(unique = true)
 	private String email;
 	private String password;
-	private String cpassword;
 	@Column(length=1000)
 	private String imgUrl;
-	private USER_ROLE role = USER_ROLE.ROLE_TEACHER;
-	
-	@JsonIgnore
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	// private USER_ROLE role = USER_ROLE.ROLE_TEACHER;
+
+	@OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Notes> notes;
 
 	public Teacher(String tid, String firstname, String lastname, String phonenumber, String email, String password,
-			String cpassword, String imgUrl, USER_ROLE role, List<Notes> notes) {
+			String imgUrl,List<Notes> notes) {
 		super();
 		this.tid = tid;
 		this.firstname = firstname;
@@ -53,9 +48,8 @@ public class Teacher {
 		this.phonenumber = phonenumber;
 		this.email = email;
 		this.password = password;
-		this.cpassword = cpassword;
 		this.imgUrl = imgUrl;
-		this.role = role;
+		// this.role = role;
 		this.notes = notes;
 	}
 
@@ -111,15 +105,6 @@ public class Teacher {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getCpassword() {
-		return cpassword;
-	}
-
-	public void setCpassword(String cpassword) {
-		this.cpassword = cpassword;
-	}
-
 	public String getImgUrl() {
 		return imgUrl;
 	}
@@ -136,15 +121,15 @@ public class Teacher {
 		this.notes = notes;
 	}
 
-	public USER_ROLE getRole() {
-		return role;
-	}
+	// public USER_ROLE getRole() {
+	// 	return role;
+	// }
 	
 	@Override
 	public String toString() {
 		return "Teacher [tid=" + tid + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber="
-				+ phonenumber + ", email=" + email + ", password=" + password + ", cpassword=" + cpassword + ", imgUrl="
-				+ imgUrl + ", role=" + role + ", notes=" + notes + "]";
+				+ phonenumber + ", email=" + email + ", password=" + password + ", imgUrl="
+				+ imgUrl + ", notes=" + notes + "]";
 	}
 	
 	

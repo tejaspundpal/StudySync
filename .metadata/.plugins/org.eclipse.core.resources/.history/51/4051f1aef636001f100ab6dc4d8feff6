@@ -1,6 +1,0 @@
-package com.fileupload.config;
-cpackage com.fileupload.config;
-
-public class SecurityConfig {
-
-}

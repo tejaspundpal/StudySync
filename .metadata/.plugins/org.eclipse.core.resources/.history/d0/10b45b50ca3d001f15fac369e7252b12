@@ -1,0 +1,40 @@
+package com.studysync.services.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.studysync.dto.TeacherDTO;
+import com.studysync.entities.Teacher;
+import com.studysync.repos.TeacherRepository;
+import com.studysync.services.TeacherService;
+
+@Service
+public class TeacherImpl implements TeacherService {
+
+	@Autowired
+	private TeacherRepository teacherRepo;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Override
+	public Teacher addTeacher(TeacherDTO teacherDTO) {
+
+		Teacher teacher = new Teacher(
+				teacherDTO.getTid(),
+				teacherDTO.getFirstname(),
+				teacherDTO.getLastname(),
+				teacherDTO.getPhonenumber(),
+				teacherDTO.getEmail(),
+				this.passwordEncoder.encode(teacherDTO.getPassword()),
+			    teacherDTO.getImgUrl(),
+			    teacherDTO.getNotes()
+				);
+		
+		this.teacherRepo.save(teacher);
+		
+		return teacher;
+	}
+
+}

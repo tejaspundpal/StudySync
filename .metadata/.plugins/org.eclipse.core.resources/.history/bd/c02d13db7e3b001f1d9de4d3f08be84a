@@ -1,0 +1,10 @@
+package com.studysync.services;
+
+import com.studysync.dto.StudentDTO;
+import com.studysync.entities.Student;
+
+public interface StudentService {
+
+	Student addStudent(StudentDTO studentDTO);
+	
+}

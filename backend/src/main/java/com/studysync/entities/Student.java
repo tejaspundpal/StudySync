@@ -8,18 +8,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="STUDENT")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int studentid;
+	
 	@Column(unique = true)
 	private String prn;
 	private String firstname;
@@ -30,14 +27,14 @@ public class Student {
 	private String year;
 	private String division;
 	private String password;
-	private String cpassword;
 	@Column(length=1000)
 	private String imgUrl;
 	@Column(length=1000)
 	private String githubId;
 	@Column(length=1000)
 	private String linkedinId;
-	private USER_ROLE role = USER_ROLE.ROLE_STUDENT;
+	// private USER_ROLE role = USER_ROLE.ROLE_STUDENT;
+
 	public String getPrn() {
 		return prn;
 	}
@@ -86,12 +83,6 @@ public class Student {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getCpassword() {
-		return cpassword;
-	}
-	public void setCpassword(String cpassword) {
-		this.cpassword = cpassword;
-	}
 	public String getImgUrl() {
 		return imgUrl;
 	}
@@ -110,12 +101,11 @@ public class Student {
 	public void setLinkedinId(String linkedinId) {
 		this.linkedinId = linkedinId;
 	}
-	public USER_ROLE getRole() {
-		return role;
-	}
+	// public USER_ROLE getRole() {
+	// 	return role;
+	// }
 	public Student(String prn, String firstname, String lastname, String phonenumber, String email, String year,
-			String division, String password, String cpassword, String imgUrl, String githubId, String linkedinId,
-			USER_ROLE role) {
+			String division, String password, String imgUrl, String githubId, String linkedinId) {
 		super();
 		this.prn = prn;
 		this.firstname = firstname;
@@ -125,11 +115,10 @@ public class Student {
 		this.year = year;
 		this.division = division;
 		this.password = password;
-		this.cpassword = cpassword;
 		this.imgUrl = imgUrl;
 		this.githubId = githubId;
 		this.linkedinId = linkedinId;
-		this.role = role;
+		// this.role = role;
 	}
 	public Student() {
 		super();
@@ -139,8 +128,8 @@ public class Student {
 	public String toString() {
 		return "Student [prn=" + prn + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber="
 				+ phonenumber + ", email=" + email + ", year=" + year + ", division=" + division + ", password="
-				+ password + ", cpassword=" + cpassword + ", imgUrl=" + imgUrl + ", githubId=" + githubId
-				+ ", linkedinId=" + linkedinId + ", role=" + role + "]";
+				+ password + ", imgUrl=" + imgUrl + ", githubId=" + githubId
+				+ ", linkedinId=" + linkedinId + "]";
 	}
 	
 	

@@ -1,4 +1,0 @@
-package com.fileupload.repository;
-
-public interface FileUploadRepository extends JpaRepository<FileUpload, Long> {
-}
