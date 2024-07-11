@@ -69,7 +69,7 @@ public class StudentImpl implements StudentService {
 	
 	@Override
     public Student getLoggedInStudent(String email) {
-        return studentRepo.findByEmail(email);
+        return this.studentRepo.findByEmail(email);
     }
 
 	@Override

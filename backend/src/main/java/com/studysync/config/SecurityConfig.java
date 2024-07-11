@@ -17,12 +17,13 @@ public class SecurityConfig {
         .cors().and()
         .csrf().disable()
         .authorizeRequests()
-        .requestMatchers("/api/student/**","/api/teacher/**").permitAll()
+        .requestMatchers("/api/student/**","/api/teacher/**","/api/notes/**").permitAll()
         .anyRequest().authenticated()
         .and()
         .formLogin().permitAll()
         .and()
         .sessionManagement()
+        .sessionFixation().none()
         .maximumSessions(1)
         .expiredUrl("/login?expired=true");
     return http.build();

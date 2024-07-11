@@ -29,13 +29,22 @@ public class Notes {
 	 private LocalDate uploadDate;
 	 private String description;
 
-//	 @Column(columnDefinition = "LONGBLOB")
 	 @Lob
+	 @Column(columnDefinition = "LONGBLOB")
 	  private byte[] fileData;
 
 	  @ManyToOne(fetch = FetchType.LAZY)
 	  @JoinColumn(name = "teacherid")
 	  private Teacher teacher;
+
+	
+	public int getNotesid() {
+		return notesid;
+	}
+
+	public void setNotesid(int notesid) {
+		this.notesid = notesid;
+	}
 
 	public String getTeacherName() {
 		return teacherName;

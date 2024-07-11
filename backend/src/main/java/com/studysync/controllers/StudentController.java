@@ -45,6 +45,8 @@ public class StudentController {
 	        LoginMessage loginMessage = this.studentService.loginStudent(loginDTO);
 	        if (loginMessage.isStatus()) {
 	            request.getSession().setAttribute("student", loginDTO.getEmail());
+	            System.out.println("Session ID: " + request.getSession().getId());
+	            System.out.println("Session Attribute Set: " + loginDTO.getEmail());
 	        }
 	        return ResponseEntity.ok(loginMessage);
 	    }
@@ -52,6 +54,8 @@ public class StudentController {
 	    @GetMapping("/profile")
 	    public ResponseEntity<Student> getProfile(HttpServletRequest request) {
 	        String email = (String) request.getSession().getAttribute("student");
+	        System.out.println("Session ID: " + request.getSession().getId());
+	        System.out.println("Session Attribute Retrieved: " + email);
 	        if (email == null) {
 	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
 	        }

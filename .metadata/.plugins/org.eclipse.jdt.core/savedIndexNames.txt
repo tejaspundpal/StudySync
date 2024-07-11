@@ -5,7 +5,6 @@ INDEX VERSION 1.134+C:\Users\Tejas Pundpal\Documents\Java\StudySync\.metadata\.p
 742495366.index
 2822689422.index
 3874619136.index
-2774399901.index
 2109340208.index
 3325019353.index
 902036317.index
@@ -185,7 +184,6 @@ INDEX VERSION 1.134+C:\Users\Tejas Pundpal\Documents\Java\StudySync\.metadata\.p
 3291799578.index
 1062574739.index
 2585900496.index
-262284200.index
 416952252.index
 720474466.index
 731514764.index
