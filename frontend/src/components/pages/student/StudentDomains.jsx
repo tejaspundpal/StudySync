@@ -16,7 +16,7 @@ const StudentDomains = () => {
             <p className="text-gray-700 mb-4 text-justify">It helps identify and recruit top talent in software engineering, and enables
               programmers to develop problem-solving and critical thinking abilities, leading to better software
               development and innovation.</p>
-            <NavLink to="/competitive">
+            <NavLink to="/student/domain/competitive">
               <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Learn More</button>
             </NavLink>
           </div>
@@ -42,7 +42,7 @@ const StudentDomains = () => {
             <p className="text-gray-700 mb-4 text-justify">It allows individuals and organizations to make data-driven decisions. With the
               exponential growth of data, the demand for skilled data scientists, it is a promising field with
               significant potential for career growth and innovation.</p>
-            <NavLink to="/datascience">
+            <NavLink to="/student/domain/datascience">
               <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Learn More</button>
             </NavLink>
           </div>
