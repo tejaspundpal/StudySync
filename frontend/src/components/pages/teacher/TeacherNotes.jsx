@@ -1,14 +1,14 @@
 import React from 'react'
 import TeacherNavbar from './TeacherNavbar'
-import UploadNotes from './UploadNotes'
 import Footer from '../../Footer'
+import Notes from './Notes';
 
 const TeacherNotes = () => {
   return (
     <>
-    <TeacherNavbar/>
-    <UploadNotes/>
-    <Footer/>
+      <TeacherNavbar />
+      <Notes/>
+      <Footer />
     </>
   )
 }

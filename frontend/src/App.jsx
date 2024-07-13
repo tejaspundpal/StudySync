@@ -16,6 +16,7 @@ import StudentProfile from "./components/pages/student/StudentProfile";
 import Competitive from "./components/pages/student/competitive";
 import DataScience from "./components/pages/student/Datascience";
 import Notes from "./components/pages/student/Notes";
+import UploadNotes from "./components/pages/teacher/UploadNotes";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/student/explore-friends" element={<ExploreFriends/>} />
           <Route path="/teacher/dashboard" element={<TeacherDashboard/>} />
           <Route path="/teacher/notes" element={<TeacherNotes/>} />
+          <Route path="/teacher/notes/upload" element={<UploadNotes/>} />
           <Route path="/student/notes" element={<Notes/>} />
           <Route path="/student/domain/competitive" element={<Competitive/>} />
           <Route path="/student/domain/datascience" element={<DataScience/>} />

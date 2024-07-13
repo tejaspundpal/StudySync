@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useRef } from 'react';
+import TeacherNavbar from './TeacherNavbar';
+import Footer from '../../Footer';
 
 const UploadNotes = () => {
 
   const initialFormData = {
     teacherName: '',
-    title: '',
     subject: '',
     year: '',
     description: '',
@@ -31,7 +32,6 @@ const UploadNotes = () => {
         const data = new FormData();
         data.append('notes', formData.notes);
         data.append('teacherName', formData.teacherName);
-        data.append('title', formData.title);
         data.append('subject', formData.subject);
         data.append('year', formData.year);
         data.append('description', formData.description);
@@ -58,6 +58,8 @@ const UploadNotes = () => {
 };
 
   return (
+    <>
+    <TeacherNavbar/>
     <div className="container mx-auto mt-5">
       <h1 className="text-3xl font-semibold text-center mb-8 text-neutral-700">Upload Notes</h1>
       <form className="max-w-4xl mx-auto" onSubmit={handleFormSubmit}>
@@ -69,18 +71,6 @@ const UploadNotes = () => {
               id="teacherName"
               name="teacherName"
               value={formData.teacherName}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:border-purple-500"
-              required
-            />
-          </div>
-          <div className="w-full md:w-1/2 md:pl-2 mb-3">
-            <label htmlFor="title" className="block text-gray-700">Title</label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              value={formData.title}
               onChange={handleChange}
               className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:border-purple-500"
               required
@@ -111,18 +101,6 @@ const UploadNotes = () => {
             />
           </div>
           <div className="w-full md:w-1/2 md:pl-2 mb-3">
-            <label htmlFor="description" className="block text-gray-700">Description</label>
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              rows="4"
-              className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:border-purple-500"
-              required
-            ></textarea>
-          </div>
-          <div className="w-full md:w-1/2 md:pl-2 mb-3">
             <label htmlFor="notes" className="block text-gray-700">Upload File</label>
             <input
               type="file"
@@ -134,17 +112,31 @@ const UploadNotes = () => {
               required
             />
           </div>
+          <div className="w-full md:w-1/2 md:pl-2 mb-3">
+            <label htmlFor="description" className="block text-gray-700">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              rows="4"
+              className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:border-purple-500"
+              required
+            ></textarea>
+          </div>
         </div>
         <div className="mb-4 ml-2">
           <button
             type="submit"
             className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-4 py-2 rounded focus:outline-none focus:bg-purple-600"
           >
-            Upload File
+            Upload
           </button>
         </div>
       </form>
     </div>
+    <Footer/>
+    </>
   );
 };
 

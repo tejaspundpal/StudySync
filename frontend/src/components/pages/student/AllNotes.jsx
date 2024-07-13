@@ -2,17 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useAllNotes from '../../../utils/useAllNotes';
 
-const TeacherHome = () => {
+const AllNotes = () => {
     const [notesYear, setNotesYear] = useState('2');
-    const [notesLoaded, setNotesLoaded] = useState(false);
-
-    const notes = useAllNotes();
-    // console.log(notes);
-    useEffect(() => {
-        if (notes !== null) {
-            setNotesLoaded(true);
-        }
-    }, [notes])
+    const {notes, loading} = useAllNotes();
 
     const handleYearClick = (year) => {
         setNotesYear(year);
@@ -33,8 +25,8 @@ const TeacherHome = () => {
                     <button className="mx-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded" onClick={() => handleYearClick('4')}>4th Year</button>
                 </div>
                 {
-                    !notesLoaded ? (<p>Loading...</p>) :
-                        filteredNotes && filteredNotes.length === 0 ? (<h1 className='mt-5 font-bold text-gray-700'>Wait for Notes to upload...</h1>) : (
+                    loading ? (<p>Loading...</p>) :
+                        filteredNotes && filteredNotes.length === 0 ? (<h1 className='mt-5 font-bold text-gray-700 ml-2'>No Notes to Show ! Wait for Notes to upload...</h1>) : (
                             <table className="min-w-4xl bg-white shadow-lg rounded mt-10">
                                 <thead className='border'>
                                     <tr className="text-left text-neutral-700">
@@ -66,4 +58,4 @@ const TeacherHome = () => {
     );
 }
 
-export default TeacherHome;
+export default AllNotes;

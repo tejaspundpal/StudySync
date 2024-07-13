@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,11 +32,10 @@ public class NotesController {
 	@PostMapping("/upload")
 	public ResponseEntity<Notes>uploadFile(@RequestParam("notes") MultipartFile notes,
 										   @RequestParam("teacherName") String teacherName,
-										   @RequestParam("title") String title,
 										   @RequestParam("subject") String subject,
 										   @RequestParam("year") String year,
 										   @RequestParam("description") String description) throws IOException{
-		Notes notes1 = this.notesService.saveFile(notes, teacherName, title, subject, year, description);
+		Notes notes1 = this.notesService.saveFile(notes, teacherName, subject, year, description);
 		return new ResponseEntity<>(notes1,HttpStatus.CREATED);
 	}
 	
@@ -62,4 +62,12 @@ public class NotesController {
         }
     }
 	
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void>deleteNote(@PathVariable int id){
+    	boolean isRemoved = this.notesService.deleteNoteById(id);
+    	if(isRemoved) {
+    		return ResponseEntity.noContent().build();
+    	}
+    	return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
 }
