@@ -1,0 +1,17 @@
+package com.studysync.services;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.studysync.entities.Question;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+public interface QuestionService {
+
+	Question createQuestion (Question question);
+	
+	List<Question> getAllQuestions();
+}

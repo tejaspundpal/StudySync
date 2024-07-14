@@ -1,0 +1,23 @@
+package com.studysync.services.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.studysync.entities.Question;
+import com.studysync.repos.QuestionRepository;
+import com.studysync.services.QuestionService;
+
+@Service
+public class QuestionImpl implements QuestionService{
+
+	@Autowired
+	private QuestionRepository questionRepo;
+	
+	@Override
+	public Question createQuestion(Question question) {
+
+		Question q = questionRepo.save(question);
+		return q;
+	}
+
+}

@@ -1,5 +1,0 @@
-package com.studysync.services.payload.response;
-
-public class LoginMessage {
-
-}

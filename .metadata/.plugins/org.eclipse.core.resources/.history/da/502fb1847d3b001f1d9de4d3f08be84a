@@ -1,5 +1,0 @@
-package com.studysync.dto;
-
-public class LoginDTO {
-
-}
