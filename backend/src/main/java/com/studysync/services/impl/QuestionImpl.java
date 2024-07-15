@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.object.UpdatableSqlQuery;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +65,12 @@ public class QuestionImpl implements QuestionService{
 	@Override
 	public void deleteQuestion(int id) {
 		questionRepo.deleteById(id);
+	}
+
+	@Override
+	public List<Question> getQuestionsForUsers(Integer noOfQuestions, String subject) {
+		Pageable pageable = PageRequest.of(0, noOfQuestions);
+        return questionRepo.findBySubject(subject, pageable).getContent();
 	}
 
 }

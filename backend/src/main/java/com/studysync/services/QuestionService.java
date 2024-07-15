@@ -23,4 +23,6 @@ public interface QuestionService {
     Question updateQuestion(int id, Question question) throws ChangeSetPersister.NotFoundException;
     
     void deleteQuestion(int id);
+    
+    List<Question> getQuestionsForUsers(Integer noOfQuestions,String subject);
 }
