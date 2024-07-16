@@ -1,5 +1,0 @@
-package com.studysync.services;
-
-public interface TeacherService {
-
-}

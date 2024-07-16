@@ -17,6 +17,8 @@ import Competitive from "./components/pages/student/competitive";
 import DataScience from "./components/pages/student/Datascience";
 import Notes from "./components/pages/student/Notes";
 import UploadNotes from "./components/pages/teacher/UploadNotes";
+import TeacherQuiz from "./components/pages/teacher/TeacherQuiz";
+import AddQuestion from "./components/pages/teacher/Quiz/AddQuestion";
 
 function App() {
 
@@ -39,6 +41,8 @@ function App() {
           <Route path="/student/notes" element={<Notes/>} />
           <Route path="/student/domain/competitive" element={<Competitive/>} />
           <Route path="/student/domain/datascience" element={<DataScience/>} />
+          <Route path="/teacher/quiz" element={<TeacherQuiz/>} />
+          <Route path="/teacher/quiz/create-quiz" element={<AddQuestion/>} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
