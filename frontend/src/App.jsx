@@ -19,6 +19,7 @@ import Notes from "./components/pages/student/Notes";
 import UploadNotes from "./components/pages/teacher/UploadNotes";
 import TeacherQuiz from "./components/pages/teacher/TeacherQuiz";
 import AddQuestion from "./components/pages/teacher/Quiz/AddQuestion";
+import GetAllQuiz from "./components/pages/teacher/Quiz/GetAllQuiz";
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
           <Route path="/student/domain/datascience" element={<DataScience/>} />
           <Route path="/teacher/quiz" element={<TeacherQuiz/>} />
           <Route path="/teacher/quiz/create-quiz" element={<AddQuestion/>} />
+          <Route path="/teacher/quiz/all-quizzes" element={<GetAllQuiz/>} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

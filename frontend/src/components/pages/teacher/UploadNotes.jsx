@@ -28,7 +28,6 @@ const UploadNotes = () => {
   const handleFormSubmit = async(e) => {
     e.preventDefault();
     // console.log(formData);
-    e.preventDefault();
         const data = new FormData();
         data.append('notes', formData.notes);
         data.append('teacherName', formData.teacherName);
