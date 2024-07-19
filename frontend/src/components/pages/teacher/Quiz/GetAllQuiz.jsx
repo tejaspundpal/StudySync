@@ -30,7 +30,7 @@ const GetAllQuiz = () => {
 
     const handleDeleteQuestion = async (id) => {
         try {
-            await deleteQuestion();
+            await deleteQuestion(id);
             setQuestions(questions.filter((question) => question.id !== id));
             setIsQuestionDeleted(true);
             setDeleteSuccess("Question Deleted Successfully !");
@@ -53,10 +53,10 @@ const GetAllQuiz = () => {
             <section className="container mx-auto min-h-screen">
                 <div className="flex flex-col md:flex-row mt-5">
                     <div className="w-full md:w-1/2 mb-2 md:mb-0 text-gray-600">
-                        <h4>All Quiz Questions</h4>
+                        <h3 className='text-xl font-medium'>All Quiz Questions</h3>
                     </div>
                     <div className="w-full md:w-1/2 flex justify-end">
-                        <NavLink to={"/create-quiz"} className="flex items-center text-blue-500 hover:text-blue-700">
+                        <NavLink to={"/teacher/quiz/create-quiz"} className="flex items-center text-blue-500 hover:text-blue-700">
                             <FaPlus className="mr-2" /> Add Question
                         </NavLink>
                     </div>
@@ -67,8 +67,8 @@ const GetAllQuiz = () => {
                         {deleteSuccess}
                     </div>
                 )}
-                {questions.map((question, index) => (
-                    <div key={question.id} className="mb-6">
+                {questions && questions.map((question, index) => (
+                    <div key={question.id} className="mb-5">
                         <pre>
                             <h4 className="text-gray-600">{`${index + 1}. ${question.question}`}</h4>
                         </pre>
@@ -77,15 +77,15 @@ const GetAllQuiz = () => {
                                 <li key={index}>{choice}</li>
                             ))}
                         </ul>
-                        <p className="text-green-600">Correct Answer: {question.correctAnswers}</p>
+                        <p className="text-green-600 mb-1">Correct Answer: {question.correctAnswers}</p>
                         <div className="flex space-x-2">
-                            <NavLink to={`/update-quiz/${question.id}`}>
-                                <button className="btn btn-sm btn-outline-warning border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white transition duration-200">
+                            <NavLink to={`/teacher/quiz/update-quiz/${question.id}`}>
+                                <button className="px-1 rounded-md border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white transition duration-200">
                                     Edit Question
                                 </button>
                             </NavLink>
                             <button
-                                className="btn btn-sm btn-outline-danger border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition duration-200"
+                                className="px-1 rounded-md border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition duration-200"
                                 onClick={() => handleDeleteQuestion(question.id)}>
                                 Delete Question
                             </button>

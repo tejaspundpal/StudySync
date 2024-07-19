@@ -18,6 +18,7 @@ const Notes = () => {
             // Refetch the notes
             const response = await axios.get('http://localhost:8182/api/notes/all');
             setNotes(response.data);
+            alert("File Deleted Successfully !")
         } catch (error) {
             console.error("There was an error deleting the note!", error);
         }

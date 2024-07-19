@@ -20,6 +20,9 @@ import UploadNotes from "./components/pages/teacher/UploadNotes";
 import TeacherQuiz from "./components/pages/teacher/TeacherQuiz";
 import AddQuestion from "./components/pages/teacher/Quiz/AddQuestion";
 import GetAllQuiz from "./components/pages/teacher/Quiz/GetAllQuiz";
+import UpdateQuestion from "./components/pages/teacher/Quiz/UpdateQuestion";
+import QuizHome from "./components/pages/student/Quiz/QuizHome";
+import TakeQuiz from "./components/pages/student/Quiz/TakeQuiz";
 
 function App() {
 
@@ -43,8 +46,11 @@ function App() {
           <Route path="/student/domain/competitive" element={<Competitive/>} />
           <Route path="/student/domain/datascience" element={<DataScience/>} />
           <Route path="/teacher/quiz" element={<TeacherQuiz/>} />
+          <Route path="/student/quiz" element={<QuizHome/>} />
           <Route path="/teacher/quiz/create-quiz" element={<AddQuestion/>} />
           <Route path="/teacher/quiz/all-quizzes" element={<GetAllQuiz/>} />
+          <Route path="/teacher/quiz/update-quiz/:id" element={<UpdateQuestion/>} />
+          <Route path="/student/quiz/take-quiz" element={<TakeQuiz/>} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
