@@ -23,6 +23,7 @@ import GetAllQuiz from "./components/pages/teacher/Quiz/GetAllQuiz";
 import UpdateQuestion from "./components/pages/teacher/Quiz/UpdateQuestion";
 import QuizHome from "./components/pages/student/Quiz/QuizHome";
 import TakeQuiz from "./components/pages/student/Quiz/TakeQuiz";
+import QuizResult from "./components/pages/student/Quiz/QuizResult";
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/teacher/quiz/all-quizzes" element={<GetAllQuiz/>} />
           <Route path="/teacher/quiz/update-quiz/:id" element={<UpdateQuestion/>} />
           <Route path="/student/quiz/take-quiz" element={<TakeQuiz/>} />
+          <Route path="/student/quiz/quiz-result" element={<QuizResult/>} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
