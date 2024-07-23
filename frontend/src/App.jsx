@@ -24,6 +24,10 @@ import UpdateQuestion from "./components/pages/teacher/Quiz/UpdateQuestion";
 import QuizHome from "./components/pages/student/Quiz/QuizHome";
 import TakeQuiz from "./components/pages/student/Quiz/TakeQuiz";
 import QuizResult from "./components/pages/student/Quiz/QuizResult";
+import TeacherEvent from "./components/pages/teacher/TeacherEvent";
+import AddEvent from "./components/pages/teacher/AddEvent";
+import AllEvents from "./components/pages/teacher/AllEvents";
+import EventDetails from "./components/pages/teacher/EventDetails";
 
 function App() {
 
@@ -53,6 +57,10 @@ function App() {
           <Route path="/teacher/quiz/update-quiz/:id" element={<UpdateQuestion/>} />
           <Route path="/student/quiz/take-quiz" element={<TakeQuiz/>} />
           <Route path="/student/quiz/quiz-result" element={<QuizResult/>} />
+          <Route path="/teacher/events" element={<TeacherEvent/>} />
+          <Route path="/teacher/events/add-event" element={<AddEvent/>} />
+          <Route path="/teacher/events/all-events" element={<AllEvents/>} />
+          <Route path="/teacher/events/all-events/details/:id" element={<EventDetails/>} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

@@ -1,0 +1,15 @@
+package com.studysync.services.impl;
+
+import com.studysync.dto.EventDTO;
+import com.studysync.entities.Event;
+import com.studysync.services.EventService;
+
+public class EventImpl implements EventService {
+
+	@Override
+	public Event addEvent(EventDTO eventDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

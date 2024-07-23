@@ -1,0 +1,12 @@
+package com.studysync.services;
+
+import org.springframework.stereotype.Service;
+
+import com.studysync.dto.EventDTO;
+import com.studysync.entities.Event;
+
+@Service
+public interface EventService {
+
+	Event addEvent(EventDTO eventDTO);
+}

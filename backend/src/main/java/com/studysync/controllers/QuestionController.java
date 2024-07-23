@@ -26,6 +26,12 @@ import com.studysync.services.QuestionService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+*
+* @author Tejas Pundpal
+*/
+
+
 @RestController
 @RequestMapping("/api/quiz")
 @CrossOrigin(origins = "http://localhost:5173")

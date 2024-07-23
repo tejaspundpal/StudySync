@@ -15,6 +15,7 @@ const navigation = [
   { name: 'Dashboard', href: '/teacher/dashboard', current: true },
   { name: 'Notes', href: '/teacher/notes', current: false },
   { name: 'Quiz', href: '/teacher/quiz', current: false },
+  { name: 'Events', href: '/teacher/events', current: false },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '/teacher/profile' },

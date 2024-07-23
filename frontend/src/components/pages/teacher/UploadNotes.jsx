@@ -59,7 +59,7 @@ const UploadNotes = () => {
   return (
     <>
     <TeacherNavbar/>
-    <div className="container mx-auto mt-5">
+    <div className="container mx-auto mt-5 min-h-screen">
       <h1 className="text-3xl font-semibold text-center mb-8 text-neutral-700">Upload Notes</h1>
       <form className="max-w-4xl mx-auto" onSubmit={handleFormSubmit}>
         <div className="mb-4 flex flex-wrap">
@@ -83,6 +83,7 @@ const UploadNotes = () => {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
+              placeholder='Enter Subject'
               className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:border-purple-500"
               required
             />
@@ -95,6 +96,7 @@ const UploadNotes = () => {
               name="year"
               value={formData.year}
               onChange={handleChange}
+              placeholder='Enter Class Year'
               className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:border-purple-500"
               required
             />
@@ -118,6 +120,7 @@ const UploadNotes = () => {
               name="description"
               value={formData.description}
               onChange={handleChange}
+              placeholder='Enter Description'
               rows="4"
               className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:border-purple-500"
               required
