@@ -15,6 +15,7 @@ const navigation = [
   { name: 'Dashboard', href: '/student/dashboard', current: true },
   { name: 'Notes', href: '/student/notes', current: false },
   { name: 'Quiz', href: '/student/quiz', current: false },
+  { name: 'Event', href: '/student/events', current: false },
 ];
 
 const userNavigation = [

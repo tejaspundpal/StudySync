@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import axios from 'axios';
-import TeacherNavbar from './TeacherNavbar';
-import Footer from '../../Footer';
 import 'react-calendar/dist/Calendar.css';
 import { NavLink } from 'react-router-dom';
+import StudentNavbar from './StudentNavbar';
+import Footer from '../../Footer';
 
-const AllEvents = () => {
+const StudentAllEvents = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const AllEvents = () => {
       <div className="flex flex-col items-center">
         {dayEvents.map(event => (
           <div key={event.id} className="text-sm p-1">
-            <NavLink to={`/teacher/events/all-events/details/${event.id}`}><strong>{event.title}</strong></NavLink>
+            <NavLink to={`/student/events/details/${event.id}`}><strong>{event.title}</strong></NavLink>
           </div>
         ))}
       </div>
@@ -36,7 +36,7 @@ const AllEvents = () => {
 
   return (
     <>
-      <TeacherNavbar />
+      <StudentNavbar/>
       <div className="min-h-screen bg-gray-100 flex flex-col items-center p-4">
       <h1 className='text-3xl font-medium text-gray-600 mb-5 mt-1'>All Events</h1>
         <div className="w-full max-w-5xl bg-white shadow-md rounded-lg p-6">
@@ -51,4 +51,4 @@ const AllEvents = () => {
   );
 }
 
-export default AllEvents;
+export default StudentAllEvents;

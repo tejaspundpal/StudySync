@@ -29,6 +29,9 @@ const EventDetails = () => {
                         <h1 className="text-2xl font-bold mb-4">{eventDetails.title}</h1>
                         <p className="text-lg mb-2"><strong>Date:</strong> {new Date(eventDetails.date).toLocaleDateString()}</p>
                         <p className="text-lg mb-2"><strong>Description:</strong> {eventDetails.description}</p>
+                        <p className="text-lg mb-2"><strong>Time:</strong> {eventDetails.time}</p>
+                        <p className="text-lg mb-2"><strong>Location:</strong> {eventDetails.location}</p>
+                        <p className="text-lg mb-2"><strong>Year:</strong> {getYearText(eventDetails.year)}</p>
                     </div>
                 ) : (
                     <p>Loading event details...</p>

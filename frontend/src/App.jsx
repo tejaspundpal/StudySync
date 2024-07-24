@@ -28,6 +28,8 @@ import TeacherEvent from "./components/pages/teacher/TeacherEvent";
 import AddEvent from "./components/pages/teacher/AddEvent";
 import AllEvents from "./components/pages/teacher/AllEvents";
 import EventDetails from "./components/pages/teacher/EventDetails";
+import StudentAllEvents from "./components/pages/student/StudentAllEvents";
+import StudentEventDetails from "./components/pages/student/StudentEventDetails";
 
 function App() {
 
@@ -61,6 +63,8 @@ function App() {
           <Route path="/teacher/events/add-event" element={<AddEvent/>} />
           <Route path="/teacher/events/all-events" element={<AllEvents/>} />
           <Route path="/teacher/events/all-events/details/:id" element={<EventDetails/>} />
+          <Route path="/student/events" element={<StudentAllEvents/>} />
+          <Route path="/student/events/details/:id" element={<StudentEventDetails/>} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
