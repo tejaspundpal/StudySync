@@ -4,25 +4,38 @@ import useAllStudents from '../../../utils/useAllStudents';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import Footer from '../../Footer'
+import { searchStudents } from '../../../utils/useSearchStudents'
 
 
 const ExploreFriends = () => {
   const [studentsLoaded, setStudentsLoaded] = useState(false);
   const [selectedYear, setSelectedYear] = useState('2');
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredStudents, setFilteredStudents] = useState([]);
+  const [originalStudents, setOriginalStudents] = useState([]);
   const students = useAllStudents();
 
   useEffect(() => {
     if (students !== null) {
+      const yearStudents = students.filter(student => student.year === selectedYear)
+      setOriginalStudents(yearStudents);
+      setFilteredStudents(yearStudents);
       setStudentsLoaded(true);
     }
-  }, [students]);
+  }, [students, selectedYear]);
 
   const handleYearClick = (year) => {
     setSelectedYear(year);
+    const yearStudents = students.filter(student => student.year === year)
+    setOriginalStudents(yearStudents);
+    setFilteredStudents(yearStudents);
   };
 
-  console.log('Student list', students);
-  const filteredStudents = students && students.filter(student => student.year === selectedYear)
+  const handleSearch = () => {
+    const data = searchStudents(searchInput, originalStudents);
+    // console.log(data);
+    setFilteredStudents(data);
+  }
 
   return (
     <>
@@ -31,6 +44,21 @@ const ExploreFriends = () => {
         <div className='w-5/6'>
           <div className='mt-10 flex justify-between'>
             <h1 className="text-3xl font-semibold text-center text-neutral-700 ml-2">Registered Students</h1>
+            <div className="mt-1">
+              <input
+                type="text"
+                className="p-2 border-solid border border-black rounded-md w-60 h-8"
+                placeholder="Search Name"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+              />
+              <button
+                className="mx-3 border border-solid rounded-md px-2 py-1 bg-purple-600 text-white hover:bg-purple-700"
+                onClick={handleSearch}
+              >
+                Search
+              </button>
+            </div>
           </div>
           <p className='text-sm mt-3 ml-2'>Click on the button to see the Students of that particular year.</p>
           <div className="flex my-4">
@@ -86,7 +114,7 @@ const ExploreFriends = () => {
           }
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   )
 }
