@@ -3,6 +3,7 @@ import logo from '../../../assets/images/StudySync.png';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { stringify } from 'flatted';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const TeacherRegister = () => {
   const [userReg, setUserReg] = useState({
@@ -26,18 +27,30 @@ const TeacherRegister = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if(userReg.password !== userReg.cpassword){
-      setErrorMessage("Password do not match !");
+    if (userReg.password !== userReg.cpassword) {
+      toast.error("Passwords do not match.");
       return;
     }
+
+    if (userReg.phonenumber.length !== 10) {
+      toast.error("Mobile number must be exactly 10 digits.");
+      return;
+    }
+
+    if (userReg.password.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
+      return;
+    }
+
     try {
         const formData = {...userReg};
-        console.log('FormData :',stringify(formData));
+        // console.log('FormData :',stringify(formData));
         const response = await axios.post('http://localhost:8182/api/teacher/register', formData);
-        console.log('Registration successful', response.data);
+        // console.log('Registration successful', response.data);
+        toast.success('Registration successful !')
     } catch (error) {
         console.error('Registration failed', error);
-        setErrorMessage('Registration failed. Please try again.');
+        toast.error('Registration failed. Please try again.');
     }
 };
 
@@ -52,11 +65,11 @@ const TeacherRegister = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create an Account
             </h1>
-            {errorMessage && (
+            {/* {errorMessage && (
               <div className="text-red-500 text-sm mb-4">
                 {errorMessage}
               </div>
-            )}
+            )} */}
             <form className="space-y-4 md:space-y-6" action="#" onSubmit={handleRegister}>
               <div className="grid grid-cols-2 gap-4">
                 <div>

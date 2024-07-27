@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const api = axios.create({
   baseURL: "http://localhost:8182/api/quiz",
@@ -10,7 +11,7 @@ export const api = axios.create({
 export const createQuestion = async (quizQuestion) => {
   try {
     const response = await api.post("/create-question", quizQuestion);
-    alert("Question Added Successfully !");
+    toast.success("Question Added Successfully !");
     return response.data;
   } catch (error) {
     console.error("Error creating question:", error);

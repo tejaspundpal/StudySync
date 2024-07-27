@@ -3,6 +3,7 @@ import TeacherNavbar from '../TeacherNavbar'
 import Footer from '../../../Footer'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import { getQuestionById, updateQuestion } from '../../../../utils/useQuizService'
+import { toast } from 'react-toastify'
 
 const UpdateQuestion = () => {
     const { id } = useParams();
@@ -58,10 +59,11 @@ const UpdateQuestion = () => {
                     .map((answer) => answer.trim())
             }
             await updateQuestion(id, updatedQuestion);
-            alert("Question Updated Successfully !");
+            toast.success("Question Updated Successfully !");
             navigate("/teacher/quiz/all-quizzes")
         } catch (error) {
             console.error(error)
+            toast.error('Something Went Wrong')
         }
     }
 

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useAllNotes from '../../../utils/useAllNotes';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Notes = () => {
     const [notesYear, setNotesYear] = useState('2');
@@ -18,14 +19,14 @@ const Notes = () => {
             // Refetch the notes
             const response = await axios.get('http://localhost:8182/api/notes/all');
             setNotes(response.data);
-            alert("File Deleted Successfully !")
+            toast.success("File Deleted Successfully !")
         } catch (error) {
             console.error("There was an error deleting the note!", error);
+            toast.error("Something went wrong")
         }
     };
 
     const filteredNotes = notes && notes.filter(note => note.year === notesYear);
-
 
     return (
         <div className="overflow-x-auto min-h-screen mt-12 ml-32">

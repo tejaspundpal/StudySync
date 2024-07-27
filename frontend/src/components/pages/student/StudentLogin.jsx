@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import logo from '../../../assets/images/StudySync.png';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { toast } from 'react-toastify';
 
 const StudentLogin = () => {
   const [userLog, setUserLog] = useState({
@@ -26,14 +26,15 @@ const StudentLogin = () => {
       console.log(response.data);
       
       if (response.data.message === "Email not exist") {
-        alert("Email not exist");
+        toast.error("Email Not Exist");
       } else if(response.data.message === "Login Success") { 
+        toast.success("Login Successful !")
         navigate('/student/dashboard');
       } else { 
-        alert("Incorrect Password !");
+        toast.error("Incorrect Password !");
       }
     } catch (error) {
-      console.error('Login failed', error);
+      toast.error('Login failed', error);
     }
   };
 

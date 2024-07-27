@@ -16,6 +16,7 @@ const AllEvents = () => {
         setEvents(response.data);
      } catch (error) {
         console.error(error);
+        toast.error('Something Went Wrong')
      }
     }
     fetchEvents();

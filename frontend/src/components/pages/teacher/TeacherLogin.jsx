@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import logo from '../../../assets/images/StudySync.png';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const TeacherLogin = () => {
   const [userLog, setUserLog] = useState({
@@ -25,14 +26,16 @@ const TeacherLogin = () => {
       const response = await axios.post('http://localhost:8182/api/teacher/login', { email, password });
       console.log(response.data);
       if (response.data.message === "Email not exist") {
-        alert("Email Not Exist");
+        toast.error("Email Not Exist");
       }else if (response.data.message === "Login Success") {
+        toast.success("Login Successful !")
         navigate('/teacher/dashboard');
       } else if (response.data.message === "Password Not Match") {
-        alert("Incorrect Password");
+        toast.error("Incorrect Password");
       }
     } catch (error) {
       console.error('Login failed', error);
+      toast.error("Login Failed!")
     }
   };
 

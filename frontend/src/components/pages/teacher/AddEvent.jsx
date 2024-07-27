@@ -3,6 +3,7 @@ import axios from 'axios';
 import TeacherNavbar from './TeacherNavbar'
 import Footer from '../../Footer'
 import { stringify } from 'flatted';
+import { toast } from 'react-toastify';
 
 const AddEvent = () => {
     const [event, setEvent] = useState({
@@ -37,11 +38,12 @@ const AddEvent = () => {
         try {
             const formData = { ...event };
         const response = await axios.post('http://localhost:8182/api/event/create-event',formData);
-        alert("Event Added Successfully !")
+        toast.success("Event Added Successfully !")
         // console.log("FormData : ", response.data);
         resetForm();
         } catch (error) {
             console.error(error);
+            toast.error('Something Went Wrong')
         }
     }
     return (

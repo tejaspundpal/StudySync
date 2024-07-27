@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useRef } from 'react';
 import TeacherNavbar from './TeacherNavbar';
 import Footer from '../../Footer';
+import { toast } from 'react-toastify';
 
 const UploadNotes = () => {
 
@@ -41,17 +42,17 @@ const UploadNotes = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            alert('File uploaded successfully');
+            toast.success('File uploaded successfully !');
             setFormData(initialFormData);
             fileInputRef.current.value = null;
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             if (error.response) {
                 console.error('Error uploading file:', error.response.data);
-                alert(`Error uploading file: ${error.response.data}`);
+                toast.error('Error uploading file');
             } else {
                 console.error('Error uploading file:', error.message);
-                alert(`Error uploading file: ${error.message}`);
+                toast.error('Error uploading file');
             }
         }
 };

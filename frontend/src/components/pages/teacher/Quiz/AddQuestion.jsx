@@ -3,6 +3,7 @@ import Footer from '../../../Footer'
 import TeacherNavbar from '../TeacherNavbar'
 import { createQuestion, getSubjects } from '../../../../utils/useQuizService'
 import { NavLink } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const AddQuestion = () => {
     const [question, setQuestion] = useState("");
@@ -74,7 +75,7 @@ const AddQuestion = () => {
 
             await createQuestion(result)
            
-            console.log("Question : ",result);
+            // console.log("Question : ",result);
             
             setQuestion("")
             setQuestionType("single")
@@ -83,6 +84,7 @@ const AddQuestion = () => {
             setSubject("")
         } catch (error) {
             console.error(error)
+            toast.error('Something Went Wrong')
         }
     }
 
