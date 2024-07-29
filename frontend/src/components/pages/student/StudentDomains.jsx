@@ -4,7 +4,7 @@ import cpImg from '../../../assets/images/cp.png';
 import dsImg from '../../../assets/images/ds.jpg';
 import wdImg from '../../../assets/images/wd.png';
 
-const StudentDomains = () => {
+const StudentDomains = (props) => {
   return (
     <section className="bg-gray-100 p-6" id="section-three">
       <h2 className="text-3xl font-bold text-center mb-8 text-gray-700">Explore Domains</h2>
@@ -16,7 +16,7 @@ const StudentDomains = () => {
             <p className="text-gray-700 mb-4 text-justify">It helps identify and recruit top talent in software engineering, and enables
               programmers to develop problem-solving and critical thinking abilities, leading to better software
               development and innovation.</p>
-            <NavLink to="/student/domain/competitive">
+            <NavLink to={`/student/domain/competitive/${props.id}`}>
               <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Learn More</button>
             </NavLink>
           </div>
@@ -29,7 +29,7 @@ const StudentDomains = () => {
             <p className="text-gray-700 mb-4 text-justify">It is in high demand and offers a wide range of job opportunities. Web development
               skills allow individuals to create and maintain websites and applications, which are essential tools
               for modern businesses and organizations.</p>
-            <NavLink to="/webd">
+            <NavLink to={`/student/domain/webd/${props.id}`}>
               <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Learn More</button>
             </NavLink>
           </div>
@@ -42,7 +42,7 @@ const StudentDomains = () => {
             <p className="text-gray-700 mb-4 text-justify">It allows individuals and organizations to make data-driven decisions. With the
               exponential growth of data, the demand for skilled data scientists, it is a promising field with
               significant potential for career growth and innovation.</p>
-            <NavLink to="/student/domain/datascience">
+            <NavLink to={`/student/domain/datascience/${props.id}`}>
               <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Learn More</button>
             </NavLink>
           </div>

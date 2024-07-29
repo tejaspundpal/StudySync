@@ -2,9 +2,16 @@ import React from 'react';
 import 'tailwindcss/tailwind.css';
 import { Link as ScrollLink, Element } from 'react-scroll';
 import ds from '../../../assets/images/datascience/datascienceroadmap.jpg';
+import Footer from '../../Footer';
+import StudentNavbar from './StudentNavbar';
+import { useParams } from 'react-router-dom';
 
 const DataScience = () => {
+  const {id} = useParams();
+  
   return (
+    <>
+    <StudentNavbar id={id}/>
     <div className="flex h-screen overflow-y-auto bg-gray-100">
       <div className="bg-gray-200 w-56 p-5 sticky top-0 shadow-lg">
         <ul className="list-none p-0 m-0 space-y-2">
@@ -100,6 +107,8 @@ const DataScience = () => {
         </Element>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

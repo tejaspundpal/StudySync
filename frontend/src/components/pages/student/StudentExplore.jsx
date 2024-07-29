@@ -29,7 +29,7 @@ const icons = [
   { icon: faMicrosoft, name: 'Visual Studio', url: 'https://visualstudio.microsoft.com', color: '#5C2D91' }
 ];
 
-const StudentExplore = () => {
+const StudentExplore = (props) => {
   return (
     <div className=" bg-gray-100 flex flex-col items-center justify-center p-6">
         <h1 className="text-3xl font-bold mb-8 mt-8 text-gray-700">Explore Coding Tools & Technologies</h1>
@@ -47,7 +47,7 @@ const StudentExplore = () => {
             </a>
           ))}
         </div>
-        <NavLink to="/student/explore-friends" className="bg-purple-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-purple-700 transition mb-3">
+        <NavLink to={`/student/explore-friends/${props.id}`} className="bg-purple-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-purple-700 transition mb-3">
           Explore Friends At StudySync
         </NavLink>
     </div>

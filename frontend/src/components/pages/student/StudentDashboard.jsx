@@ -6,6 +6,7 @@ import Footer from '../../Footer';
 
 import { useState,useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const StudentDashboard = () => {
   // const [profile, setProfile] = useState(null);
@@ -24,12 +25,15 @@ const StudentDashboard = () => {
   //   }
   //   fetchProfile();
   // }, []);
+ 
+  const {id} = useParams();
+  // console.log(id);
 
   return (
     <>
-      <StudentNavbar />
-      <StudentExplore/>
-      <StudentDomains/>
+      <StudentNavbar id={id} />
+      <StudentExplore id={id}/>
+      <StudentDomains id={id}/>
       <Footer/>
     </>
   );

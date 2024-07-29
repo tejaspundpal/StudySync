@@ -30,6 +30,7 @@ import AllEvents from "./components/pages/teacher/AllEvents";
 import EventDetails from "./components/pages/teacher/EventDetails";
 import StudentAllEvents from "./components/pages/student/StudentAllEvents";
 import StudentEventDetails from "./components/pages/student/StudentEventDetails";
+import TeacherProfile from "./components/pages/teacher/TeacherProfile";
 
 function App() {
 
@@ -43,27 +44,28 @@ function App() {
           <Route path="/teacher-login" element={<TeacherLogin/>} />
           <Route path="/student-register" element={<StudentRegister/>} />
           <Route path="/teacher-register" element={<TeacherRegister/>} />
-          <Route path="/student/dashboard" element={<StudentDashboard/>} />
-          <Route path="/student/profile" element={<StudentProfile/>} />
-          <Route path="/student/explore-friends" element={<ExploreFriends/>} />
-          <Route path="/teacher/dashboard" element={<TeacherDashboard/>} />
-          <Route path="/teacher/notes" element={<TeacherNotes/>} />
-          <Route path="/teacher/notes/upload" element={<UploadNotes/>} />
-          <Route path="/student/notes" element={<Notes/>} />
-          <Route path="/student/domain/competitive" element={<Competitive/>} />
-          <Route path="/student/domain/datascience" element={<DataScience/>} />
-          <Route path="/teacher/quiz" element={<TeacherQuiz/>} />
-          <Route path="/student/quiz" element={<QuizHome/>} />
-          <Route path="/teacher/quiz/create-quiz" element={<AddQuestion/>} />
-          <Route path="/teacher/quiz/all-quizzes" element={<GetAllQuiz/>} />
+          <Route path="/student/dashboard/:id" element={<StudentDashboard/>} />
+          <Route path="/student/profile/:id" element={<StudentProfile/>} />
+          <Route path="/teacher/profile/:id" element={<TeacherProfile/>} />
+          <Route path="/student/explore-friends/:id" element={<ExploreFriends/>} />
+          <Route path="/teacher/dashboard/:id" element={<TeacherDashboard/>} />
+          <Route path="/teacher/notes/:id" element={<TeacherNotes/>} />
+          <Route path="/teacher/notes/upload/:id" element={<UploadNotes/>} />
+          <Route path="/student/notes/:id" element={<Notes/>} />
+          <Route path="/student/domain/competitive/:id" element={<Competitive/>} />
+          <Route path="/student/domain/datascience/:id" element={<DataScience/>} />
+          <Route path="/teacher/quiz/:id" element={<TeacherQuiz/>} />
+          <Route path="/student/quiz/:id" element={<QuizHome/>} />
+          <Route path="/teacher/quiz/create-quiz/:id" element={<AddQuestion/>} />
+          <Route path="/teacher/quiz/all-quizzes/:id" element={<GetAllQuiz/>} />
           <Route path="/teacher/quiz/update-quiz/:id" element={<UpdateQuestion/>} />
-          <Route path="/student/quiz/take-quiz" element={<TakeQuiz/>} />
-          <Route path="/student/quiz/quiz-result" element={<QuizResult/>} />
-          <Route path="/teacher/events" element={<TeacherEvent/>} />
-          <Route path="/teacher/events/add-event" element={<AddEvent/>} />
-          <Route path="/teacher/events/all-events" element={<AllEvents/>} />
+          <Route path="/student/quiz/take-quiz/:id" element={<TakeQuiz/>} />
+          <Route path="/student/quiz/quiz-result/:id" element={<QuizResult/>} />
+          <Route path="/teacher/events/:id" element={<TeacherEvent/>} />
+          <Route path="/teacher/events/add-event/:id" element={<AddEvent/>} />
+          <Route path="/teacher/events/all-events/:id" element={<AllEvents/>} />
           <Route path="/teacher/events/all-events/details/:id" element={<EventDetails/>} />
-          <Route path="/student/events" element={<StudentAllEvents/>} />
+          <Route path="/student/events/:id" element={<StudentAllEvents/>} />
           <Route path="/student/events/details/:id" element={<StudentEventDetails/>} />
         </Route>
         <Route path="*" element={<Error />} />

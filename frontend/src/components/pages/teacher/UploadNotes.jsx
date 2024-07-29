@@ -4,8 +4,12 @@ import { useRef } from 'react';
 import TeacherNavbar from './TeacherNavbar';
 import Footer from '../../Footer';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
+import useTeacherDetails from '../../../utils/useTeacherDetails';
 
 const UploadNotes = () => {
+  const {id} = useParams();
+  const teacher = useTeacherDetails(id);
 
   const initialFormData = {
     teacherName: '',
@@ -59,7 +63,7 @@ const UploadNotes = () => {
 
   return (
     <>
-    <TeacherNavbar/>
+    <TeacherNavbar id = {id}/>
     <div className="container mx-auto mt-5 min-h-screen">
       <h1 className="text-3xl font-semibold text-center mb-8 text-neutral-700">Upload Notes</h1>
       <form className="max-w-4xl mx-auto" onSubmit={handleFormSubmit}>
@@ -70,10 +74,9 @@ const UploadNotes = () => {
               type="text"
               id="teacherName"
               name="teacherName"
-              value={formData.teacherName}
-              onChange={handleChange}
+              value={`${ teacher && teacher.firstname}${teacher && teacher.lastname}`}
               className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:border-purple-500"
-              required
+              disabled
             />
           </div>
           <div className="w-full md:w-1/2 md:pl-2 mb-3">

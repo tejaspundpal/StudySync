@@ -4,29 +4,29 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from '../../../assets/images/StudySync.png'
 import { NavLink } from 'react-router-dom'
 
+export default function TeacherNavbar(props) {
 
-const user = {
-  name: 'Tejas',
-  email: 'tejas@gmail.com',
-  imageUrl:
-    'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fuser-icon&psig=AOvVaw0yilBJh2aJauC0206tztw3&ust=1718517770390000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCND92tr33IYDFQAAAAAdAAAAABAE',
-}
-const navigation = [
-  { name: 'Dashboard', href: '/teacher/dashboard', current: true },
-  { name: 'Notes', href: '/teacher/notes', current: false },
-  { name: 'Quiz', href: '/teacher/quiz', current: false },
-  { name: 'Events', href: '/teacher/events', current: false },
-]
-const userNavigation = [
-  { name: 'Your Profile', href: '/teacher/profile' },
-  { name: 'Sign out', href: '/logout' },
-]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export default function TeacherNavbar() {
+  const user = {
+    name: 'Tejas',
+    email: 'tejas@gmail.com',
+    imageUrl:
+      'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fuser-icon&psig=AOvVaw0yilBJh2aJauC0206tztw3&ust=1718517770390000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCND92tr33IYDFQAAAAAdAAAAABAE',
+  }
+  const navigation = [
+    { name: 'Dashboard', href: `/teacher/dashboard/${props.id}`, current: true },
+    { name: 'Notes', href: `/teacher/notes/${props.id}`, current: false },
+    { name: 'Quiz', href: `/teacher/quiz/${props.id}`, current: false },
+    { name: 'Events', href: `/teacher/events/${props.id}`, current: false },
+  ]
+  const userNavigation = [
+    { name: 'Your Profile', href: `/teacher/profile/${props.id}` },
+    { name: 'Sign out', href: '/logout' },
+  ]
+  
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
+  
   return (
     <>
       <Disclosure as="nav" className="bg-white shadow-lg sticky top-0 z-50">
@@ -36,7 +36,7 @@ export default function TeacherNavbar() {
               <div className="flex h-16 items-center justify-between">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <NavLink to='/teacher/dashboard'><img
+                    <NavLink to={`/teacher/dashboard/${props.id}`}><img
                       className="h-12 w-auto"
                       src={logo}
                       alt="logo"

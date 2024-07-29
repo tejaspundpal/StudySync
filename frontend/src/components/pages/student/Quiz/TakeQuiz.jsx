@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useNavigate, useLocation } from "react-router-dom"
+import { useNavigate, useLocation, useParams } from "react-router-dom"
 import { fetchQuizForUser } from "../../../../utils/useQuizService"
 import AnswerOptions from "../../../../utils/AnswerOptions"
 import StudentNavbar from "../StudentNavbar"
@@ -15,6 +15,7 @@ const TakeQuiz = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const { selectedSubject, selectedNumQuestions } = location.state
+  const {id} = useParams();
 
   useEffect(() => {
     fetchQuizData()
@@ -107,7 +108,7 @@ const TakeQuiz = () => {
     setTotalScores(scores);
     setSelectedAnswers([]);
     setCurrentQuestionIndex(0);
-    navigate("/student/quiz/quiz-result", { state: { quizQuestions, totalScores: scores } });
+    navigate(`/student/quiz/quiz-result/${id}`, { state: { quizQuestions, totalScores: scores } });
   };
 
 
@@ -128,7 +129,7 @@ const TakeQuiz = () => {
 
   return (
     <>
-      <StudentNavbar />
+      <StudentNavbar id={id}/>
       <div className="p-5 min-h-screen">
         <h3 className="text-purple-600">
           Question {quizQuestions.length > 0 ? currentQuestionIndex + 1 : 0} of {quizQuestions.length}

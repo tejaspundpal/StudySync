@@ -52,7 +52,7 @@ public class TeacherImpl implements TeacherService {
 			if(isPwdRight) {
 				Optional<Teacher>teacher1 = this.teacherRepo.findOneByEmailAndPassword(loginDTO.getEmail(), encodedPassword);
 				if(teacher1.isPresent()) {
-					return new LoginMessage("Login Success",true);
+					return new LoginMessage("Login Success",true,teacher.getTeacherid());
 				}
 				else {
 					return new LoginMessage("Login failed",false);
@@ -65,6 +65,12 @@ public class TeacherImpl implements TeacherService {
 		else {
 			return new LoginMessage("Email not exist",false);
 		}
+	}
+
+	@Override
+	public Optional<Teacher> getTeacherById(int id) {
+		Optional<Teacher> teacher = teacherRepo.findById(id);
+		return teacher;
 	}
 
 }

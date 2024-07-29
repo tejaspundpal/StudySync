@@ -58,6 +58,15 @@ public class Teacher {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	public int getTeacherid() {
+		return teacherid;
+	}
+
+	public void setTeacherid(int teacherid) {
+		this.teacherid = teacherid;
+	}
+
 	public String getTid() {
 		return tid;
 	}

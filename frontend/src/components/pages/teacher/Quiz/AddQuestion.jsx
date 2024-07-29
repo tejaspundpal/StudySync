@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Footer from '../../../Footer'
 import TeacherNavbar from '../TeacherNavbar'
 import { createQuestion, getSubjects } from '../../../../utils/useQuizService'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 const AddQuestion = () => {
@@ -13,6 +13,7 @@ const AddQuestion = () => {
     const [subject, setSubject] = useState("")
     const [newSubject, setNewSubject] = useState("")
     const [subjectOptions, setSubjectOptions] = useState([""]);
+    const {id} = useParams();
 
     const fetchSubjects = async () => {
         try {
@@ -100,7 +101,7 @@ const AddQuestion = () => {
 
     return (
         <>
-            <TeacherNavbar />
+            <TeacherNavbar id = {id}/>
             <div className="container mx-auto px-20 min-h-screen mb-10">
                 <div className="flex justify-center">
                     <div className="w-full md:w-1/2 mt-10">
@@ -264,7 +265,7 @@ const AddQuestion = () => {
                                             Save Question
                                         </button>
                                         <NavLink
-                                            to="/teacher/quiz/all-quizzes"
+                                            to={`/teacher/quiz/all-quizzes/${id}`}
                                             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
                                             Back to existing questions
                                         </NavLink>

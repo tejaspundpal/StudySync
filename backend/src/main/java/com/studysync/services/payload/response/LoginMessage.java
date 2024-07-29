@@ -4,6 +4,8 @@ public class LoginMessage {
 
 	String message;
 	boolean status;
+	int id;
+	
 	public String getMessage() {
 		return message;
 	}
@@ -16,6 +18,19 @@ public class LoginMessage {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public LoginMessage(String message, boolean status,int id) {
+		super();
+		this.message = message;
+		this.status = status;
+		this.id = id;
+	}
 	public LoginMessage(String message, boolean status) {
 		super();
 		this.message = message;
@@ -27,7 +42,7 @@ public class LoginMessage {
 	}
 	@Override
 	public String toString() {
-		return "LoginMessage [message=" + message + ", status=" + status + "]";
+		return "LoginMessage [message=" + message + ", status=" + status + ", id=" + id + "]";
 	}
 	
 	

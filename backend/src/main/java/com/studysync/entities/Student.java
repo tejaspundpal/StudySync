@@ -35,6 +35,12 @@ public class Student {
 	private String linkedinId;
 	// private USER_ROLE role = USER_ROLE.ROLE_STUDENT;
 
+	public int getStudentid() {
+		return studentid;
+	}
+	public void setStudentid(int studentid) {
+		this.studentid = studentid;
+	}
 	public String getPrn() {
 		return prn;
 	}

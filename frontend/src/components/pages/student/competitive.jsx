@@ -11,11 +11,13 @@ import lovebabbar from '../../../assets/images/competitive/lovebabbar.jpg';
 import striver from '../../../assets/images/competitive/striver.jpg';
 import Footer from '../../Footer';
 import StudentNavbar from './StudentNavbar';
+import { useParams } from 'react-router-dom';
 
 const Competitive = () => {
+  const {id} = useParams();
   return (
     <>
-    <StudentNavbar/>
+    <StudentNavbar id={id}/>
     <div className="overflow-x-hidden">
       <h1 className="text-center text-3xl font-bold mt-12">Competitive Programming - A Complete Guide</h1>
       

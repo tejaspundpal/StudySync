@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +57,7 @@ public class StudentImpl implements StudentService {
             if (isPwdRight) {
                 Optional<Student> student = studentRepo.findOneByEmailAndPassword(loginDTO.getEmail(), encodedPassword);
                 if (student.isPresent()) {
-                    return new LoginMessage("Login Success", true);
+                    return new LoginMessage("Login Success", true,student1.getStudentid());
                 } else {
                     return new LoginMessage("Login Failed", false);
                 }
@@ -77,6 +79,30 @@ public class StudentImpl implements StudentService {
 
 		List<Student>list = (List<Student>) this.studentRepo.findAll();
 		return list;
+	}
+
+	@Override
+	public Optional<Student> getStudentById(int id) {
+        Optional<Student> student = studentRepo.findById(id);
+		return student;
+	}
+
+	@Override
+	public Student updateStudent(int id, Student student) throws NotFoundException {
+		Optional<Student> theStudent = this.getStudentById(id);
+		if(theStudent.isPresent()) {
+			Student updateStudent = theStudent.get();
+			updateStudent.setDivision(student.getDivision());
+			updateStudent.setGithubId(student.getGithubId());
+			updateStudent.setPhonenumber(student.getPhonenumber());
+			updateStudent.setLinkedinId(student.getLinkedinId());
+			updateStudent.setYear(student.getYear());
+			updateStudent.setImgUrl(student.getImgUrl());
+			return studentRepo.save(updateStudent);
+		}
+		else {
+			throw new ChangeSetPersister.NotFoundException();
+		}
 	}
 
 }

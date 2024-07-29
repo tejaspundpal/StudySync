@@ -2,93 +2,75 @@ import React, { useEffect, useState } from 'react';
 import logo from '../../../assets/images/StudySync.png';
 import StudentNavbar from './StudentNavbar';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import useStudentDetails from '../../../utils/UseStudentDetails';
+import Footer from '../../Footer';
+import { toast } from 'react-toastify';
 
 const StudentProfile = () => {
-
   const [profile, setProfile] = useState(null);
-  const [error, setError] = useState(null);
+  const { id } = useParams();
+  
+  const student = useStudentDetails(id);
 
-  // useEffect(() => {
-  //   const fetchProfile = async () => {
-  //     try {
-  //       const response = await axios.get('http://localhost:8182/api/student/profile', { withCredentials: true });
-  //       setProfile(response.data);
-  //       console.log(response.data);
-  //     } catch (error) {
-  //       setError(error);
-  //       console.error("Error fetching profile: ", error);
-  //     }
-  //   }
-  //   fetchProfile();
-  // }, []);
-
-  const initialData = {
-    firstName: 'Tejas',
-    lastName: 'Pundpal',
-    prn: '20ucs112',
-    email: 'tejaspundpal55@gmail.com',
-    year: '4',
-    division: 'a',
-    phonenumber: '7620872033',
+  const [editableData, setEditableData] = useState({
+    phonenumber: '',
+    year: '',
+    division: '',
     linkedinId: '',
     githubId: ''
-  };
+  });
 
-  const [userData, setUserData] = useState(initialData);
+  useEffect(() => {
+    if (student) {
+      setEditableData({
+        phonenumber: student.phonenumber || '',
+        year: student.year || '',
+        division: student.division || '',
+        linkedinId: student.linkedinId || '',
+        githubId: student.githubId || ''
+      });
+    }
+  }, [student]);
 
   const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setUserData(prevData => ({
+    const { name, value } = e.target;
+    setEditableData(prevData => ({
       ...prevData,
       [name]: value
     }));
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setUserData(prevData => ({
-      ...prevData,
-      profileImage: file
-    }));
-  };
-
-  const saveUserData = (e) => {
+  const saveUserData = async (e) => {
     e.preventDefault();
-    console.log('User data saved:', userData);
-    alert('User data saved successfully!');
+    try {
+      await axios.put(`http://localhost:8182/api/student/update/${id}`, editableData);
+      toast.success('Student data updated successfully!');
+    } catch (error) {
+      toast.error('Error updating student data');
+    }
   };
-  
-  // if (error) {
-  //   return <div>Error fetching profile: {error.message}</div>;
-  // }
-
-  // if (!profile) {
-  //   return <div>Loading...</div>;
-  // }
 
   return (
     <>
-      <StudentNavbar />
+      <StudentNavbar id={id} />
       <form onSubmit={saveUserData}>
         <div className="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-md">
           <div className="text-center mb-6">
             <input
               type="file"
               accept="image/*"
-              onChange={handleImageChange}
               className="hidden"
               id="profile-image-upload"
             />
             <label htmlFor="profile-image-upload">
               <img
-                src={userData.profileImage ? URL.createObjectURL(userData.profileImage) : logo}
+                src={student && student.imgUrl ? URL.createObjectURL(student.imgUrl) : logo}
                 alt="Profile"
                 className="h-32 w-32 rounded-full mx-auto mb-4 cursor-pointer shadow-lg"
               />
             </label>
             <h2 className="text-3xl font-bold mb-4">Profile</h2>
-            {/* <p>Email : {profile.email}</p>
-            <p>firstname : {profile.firstName}</p> */}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -96,8 +78,7 @@ const StudentProfile = () => {
               <input
                 type="text"
                 name="firstName"
-                value={userData.firstName}
-                onChange={handleInputChange}
+                value={student && student.firstname}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-purple-500"
                 disabled
               />
@@ -107,8 +88,7 @@ const StudentProfile = () => {
               <input
                 type="text"
                 name="lastName"
-                value={userData.lastName}
-                onChange={handleInputChange}
+                value={student && student.lastname}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-purple-500"
                 disabled
               />
@@ -118,8 +98,7 @@ const StudentProfile = () => {
               <input
                 type="text"
                 name="prn"
-                value={userData.prn}
-                onChange={handleInputChange}
+                value={student && student.prn}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-purple-500"
                 disabled
               />
@@ -129,8 +108,7 @@ const StudentProfile = () => {
               <input
                 type="text"
                 name="email"
-                value={userData.email}
-                onChange={handleInputChange}
+                value={student && student.email}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-purple-500"
                 disabled
               />
@@ -140,7 +118,7 @@ const StudentProfile = () => {
               <input
                 type="text"
                 name="phonenumber"
-                value={userData.phonenumber}
+                value={editableData.phonenumber}
                 onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-purple-500"
               />
@@ -150,7 +128,7 @@ const StudentProfile = () => {
               <input
                 type="text"
                 name="year"
-                value={userData.year}
+                value={editableData.year}
                 onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-purple-500"
               />
@@ -160,7 +138,7 @@ const StudentProfile = () => {
               <input
                 type="text"
                 name="division"
-                value={userData.division}
+                value={editableData.division}
                 onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-purple-500"
               />
@@ -170,7 +148,7 @@ const StudentProfile = () => {
               <input
                 type="text"
                 name="linkedinId"
-                value={userData.linkedinId}
+                value={editableData.linkedinId}
                 onChange={handleInputChange}
                 placeholder='Enter LinkedIn URL'
                 className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-purple-500"
@@ -181,7 +159,7 @@ const StudentProfile = () => {
               <input
                 type="text"
                 name="githubId"
-                value={userData.githubId}
+                value={editableData.githubId}
                 onChange={handleInputChange}
                 placeholder='Enter Github URL'
                 className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-purple-500"
@@ -190,6 +168,7 @@ const StudentProfile = () => {
           </div>
           <div className="mt-6 flex justify-center">
             <button
+              type="submit"
               className="bg-purple-600 hover:bg-purple-500 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring focus:ring-purple-300"
             >
               Save
@@ -197,6 +176,7 @@ const StudentProfile = () => {
           </div>
         </div>
       </form>
+      <Footer />
     </>
   );
 };

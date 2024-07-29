@@ -24,12 +24,14 @@ const TeacherLogin = () => {
     try {
       const { email, password } = userLog;
       const response = await axios.post('http://localhost:8182/api/teacher/login', { email, password });
-      console.log(response.data);
+      // console.log(response.data);
+      const id = response.data.id;
+
       if (response.data.message === "Email not exist") {
         toast.error("Email Not Exist");
       }else if (response.data.message === "Login Success") {
         toast.success("Login Successful !")
-        navigate('/teacher/dashboard');
+        navigate(`/teacher/dashboard/${id}`);
       } else if (response.data.message === "Password Not Match") {
         toast.error("Incorrect Password");
       }

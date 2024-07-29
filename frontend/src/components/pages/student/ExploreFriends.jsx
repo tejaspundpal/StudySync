@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import Footer from '../../Footer'
 import { searchStudents } from '../../../utils/useSearchStudents'
+import { useParams } from 'react-router-dom';
 
 
 const ExploreFriends = () => {
@@ -14,6 +15,7 @@ const ExploreFriends = () => {
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [originalStudents, setOriginalStudents] = useState([]);
   const students = useAllStudents();
+  const {id} = useParams();
 
   useEffect(() => {
     if (students !== null) {
@@ -39,7 +41,7 @@ const ExploreFriends = () => {
 
   return (
     <>
-      <StudentNavbar />
+      <StudentNavbar id={id}/>
       <div className="overflow-x-auto min-h-screen mt-08 ml-32">
         <div className='w-5/6'>
           <div className='mt-10 flex justify-between'>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getSubjects } from "../../../../utils/useQuizService"
 import StudentNavbar from "../StudentNavbar"
 import Footer from "../../../Footer"
@@ -10,6 +10,7 @@ const QuizHome = () => {
     const [selectedNumQuestions, setSelectedNumQuestions] = useState("")
     const [subjects, setSubjects] = useState([])
     const navigate = useNavigate()
+    const {id} = useParams();
 
     useEffect(() => {
         const fetchSubjectData = async () => {
@@ -26,7 +27,7 @@ const QuizHome = () => {
     const handleNext = () => {
         if (currentStep === 3) {
             if (selectedSubject && selectedNumQuestions) {
-                navigate("/student/quiz/take-quiz", { state: { selectedNumQuestions, selectedSubject } })
+                navigate(`/student/quiz/take-quiz/${id}`, { state: { selectedNumQuestions, selectedSubject } })
             } else {
                 alert("Please select a subject and number of questions.")
             }
@@ -100,7 +101,7 @@ const QuizHome = () => {
 
     return (
         <>
-            <StudentNavbar />
+            <StudentNavbar id={id} />
             <section className="mt-5 min-h-screen">
                 <h3 className="mb-4 text-xl font-medium text-gray-600">Welcome to quiz online</h3>
                 {renderProgressBar()}
