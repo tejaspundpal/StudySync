@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.studysync.dto.LoginDTO;
 import com.studysync.dto.StudentDTO;
 import com.studysync.entities.Student;
+import com.studysync.exceptions.StudentAlreadyRegisteredException;
 import com.studysync.repos.StudentRepository;
 import com.studysync.services.StudentService;
 import com.studysync.services.payload.response.LoginMessage;
@@ -28,6 +29,12 @@ public class StudentImpl implements StudentService {
 	@Override
 	public Student addStudent(StudentDTO studentDTO) {
 
+		Optional<Student> existingStudent = studentRepo.findByPrn(studentDTO.getPrn());
+		
+		if (existingStudent.isPresent()) {
+            throw new StudentAlreadyRegisteredException("Student is already registered with entered PRN");
+        }
+		
 		Student student = new Student(
 				studentDTO.getPrn(),
 				studentDTO.getFirstname(),

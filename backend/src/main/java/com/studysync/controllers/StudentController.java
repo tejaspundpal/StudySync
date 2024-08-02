@@ -48,8 +48,6 @@ public class StudentController {
 	        LoginMessage loginMessage = this.studentService.loginStudent(loginDTO);
 	        if (loginMessage.isStatus()) {
 	            request.getSession().setAttribute("student", loginDTO.getEmail());
-	            System.out.println("Session ID: " + request.getSession().getId());
-	            System.out.println("Session Attribute Set: " + loginDTO.getEmail());
 	        }
 	        return ResponseEntity.ok(loginMessage);
 	    }

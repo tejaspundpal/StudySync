@@ -31,6 +31,7 @@ import EventDetails from "./components/pages/teacher/EventDetails";
 import StudentAllEvents from "./components/pages/student/StudentAllEvents";
 import StudentEventDetails from "./components/pages/student/StudentEventDetails";
 import TeacherProfile from "./components/pages/teacher/TeacherProfile";
+import Webd from "./components/pages/student/Webd";
 
 function App() {
 
@@ -54,6 +55,7 @@ function App() {
           <Route path="/student/notes/:id" element={<Notes/>} />
           <Route path="/student/domain/competitive/:id" element={<Competitive/>} />
           <Route path="/student/domain/datascience/:id" element={<DataScience/>} />
+          <Route path="/student/domain/webd/:id" element={<Webd/>} />
           <Route path="/teacher/quiz/:id" element={<TeacherQuiz/>} />
           <Route path="/student/quiz/:id" element={<QuizHome/>} />
           <Route path="/teacher/quiz/create-quiz/:id" element={<AddQuestion/>} />

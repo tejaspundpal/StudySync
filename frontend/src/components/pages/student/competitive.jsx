@@ -19,7 +19,7 @@ const Competitive = () => {
     <>
     <StudentNavbar id={id}/>
     <div className="overflow-x-hidden">
-      <h1 className="text-center text-3xl font-bold mt-12">Competitive Programming - A Complete Guide</h1>
+      <h1 className="text-center text-3xl font-bold mt-8 mb-5 text-gray-700">Competitive Programming - A Complete Guide</h1>
       
       <section className="bg-[#fffcf4] p-8">
         <div>
