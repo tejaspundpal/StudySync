@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/images/StudySync.png';
 import { stringify } from 'flatted';
 import { toast } from 'react-toastify';
@@ -18,6 +18,9 @@ const StudentRegister = () => {
     cpassword: ""
   });
 
+  const [otp, setOtp] = useState('');
+  const [otpSent, setOtpSent] = useState(false);
+  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (e) => {
@@ -48,7 +51,8 @@ const StudentRegister = () => {
       // console.log('FormData : ',stringify(formData));
       const response = await axios.post('http://localhost:8182/api/student/register', formData);
       // console.log('Registration successful', response.data);
-      toast.success("Registration successful !")
+      setOtpSent(true);
+      toast.success("OTP sent to email. Please verify to complete registration.")
     } catch (error) {
       if(error.response && error.response.status === 409){
         toast.error("Student is already registered with entered PRN")
@@ -58,6 +62,19 @@ const StudentRegister = () => {
       }
     }
   };
+
+  const handleVerifyOtp = async(e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:8182/api/student/verify', null, {
+        params: { email: userReg.email, otp }
+      });
+      toast.success("Registration successful!")
+      navigate('/student-login')
+    } catch (error) {
+      toast.error('Invalid OTP OR Enter Correct Email Id.');
+    }
+  }
 
   return (
     <section className="bg-white">
@@ -70,11 +87,7 @@ const StudentRegister = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create an Account
             </h1>
-            {/* {errorMessage && (
-              <div className="text-red-500 text-sm mb-4">
-                {errorMessage}
-              </div>
-            )} */}
+            { !otpSent ? (
             <form className="space-y-4 md:space-y-6" onSubmit={handleRegister}>
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -120,6 +133,15 @@ const StudentRegister = () => {
                 Already have an account? <NavLink to="/student-login" className="font-medium text-purple-600 hover:underline dark:text-purple-500">Sign In here</NavLink>
               </p>
             </form>
+            ) : (
+              <form className="space-y-4 md:space-y-6" onSubmit={handleVerifyOtp}>
+                <div>
+                  <label htmlFor="otp" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">OTP</label>
+                  <input type="text" id="otp" name="otp" value={otp} onChange={(e) => setOtp(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter OTP" required />
+                </div>
+                <button type="submit" className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Verify OTP</button>
+              </form>
+            ) }
           </div>
         </div>
       </div>

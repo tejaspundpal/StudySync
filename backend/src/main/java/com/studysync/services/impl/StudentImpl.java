@@ -11,9 +11,12 @@ import org.springframework.stereotype.Service;
 
 import com.studysync.dto.LoginDTO;
 import com.studysync.dto.StudentDTO;
+import com.studysync.entities.OTPVerification;
 import com.studysync.entities.Student;
 import com.studysync.exceptions.StudentAlreadyRegisteredException;
+import com.studysync.repos.OTPVerificationRepository;
 import com.studysync.repos.StudentRepository;
+import com.studysync.services.OTPService;
 import com.studysync.services.StudentService;
 import com.studysync.services.payload.response.LoginMessage;
 
@@ -26,8 +29,14 @@ public class StudentImpl implements StudentService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private OTPVerificationRepository otpVerificationRepo;
+	
+	@Autowired
+	private OTPService otpService;
+	
 	@Override
-	public Student addStudent(StudentDTO studentDTO) {
+	public void addStudent(StudentDTO studentDTO) {
 
 		Optional<Student> existingStudent = studentRepo.findByPrn(studentDTO.getPrn());
 		
@@ -35,24 +44,53 @@ public class StudentImpl implements StudentService {
             throw new StudentAlreadyRegisteredException("Student is already registered with entered PRN");
         }
 		
-		Student student = new Student(
-				studentDTO.getPrn(),
-				studentDTO.getFirstname(),
-				studentDTO.getLastname(),
-				studentDTO.getPhonenumber(),
-				studentDTO.getEmail(),
-				studentDTO.getYear(),
-				studentDTO.getDivision(),
-				this.passwordEncoder.encode(studentDTO.getPassword()),
-				studentDTO.getImgUrl(),
-				studentDTO.getLinkedinId(),
-				studentDTO.getGithubId()
-				);
-		this.studentRepo.save(student);
-				
-		return student;
+		String otp = otpService.generateOTP();
+		otpService.sendEmail(studentDTO.getEmail(), otp);
+		
+		OTPVerification otpVerification = new OTPVerification();
+		
+		otpVerification.setEmail(studentDTO.getEmail());
+        otpVerification.setOtp(otp);
+        otpVerification.setPrn(studentDTO.getPrn());
+        otpVerification.setFirstname(studentDTO.getFirstname());
+        otpVerification.setLastname(studentDTO.getLastname());
+        otpVerification.setPhonenumber(studentDTO.getPhonenumber());
+        otpVerification.setYear(studentDTO.getYear());
+        otpVerification.setDivision(studentDTO.getDivision());
+        otpVerification.setPassword(passwordEncoder.encode(studentDTO.getPassword()));
+        otpVerification.setImgUrl(studentDTO.getImgUrl());
+        otpVerification.setGithubId(studentDTO.getGithubId());
+        otpVerification.setLinkedinId(studentDTO.getLinkedinId());
+        otpVerificationRepo.save(otpVerification);
+		
 	}
 
+	@Override
+    public boolean verifyOtp(String email, String otp) {
+        OTPVerification otpVerification = otpVerificationRepo.findByEmailAndOtp(email, otp);
+
+        if (otpVerification != null) {
+            Student student = new Student(
+                otpVerification.getPrn(),
+                otpVerification.getFirstname(),
+                otpVerification.getLastname(),
+                otpVerification.getPhonenumber(),
+                otpVerification.getEmail(),
+                otpVerification.getYear(),
+                otpVerification.getDivision(),
+                otpVerification.getPassword(),
+                otpVerification.getImgUrl(),
+                otpVerification.getGithubId(),
+                otpVerification.getLinkedinId()
+            );
+            studentRepo.save(student);
+            otpVerificationRepo.delete(otpVerification);
+            return true;
+        } else {
+            return false;
+        }
+    }
+	
 	@Override
 	public LoginMessage loginStudent(LoginDTO loginDTO) {
 		String msg = "";

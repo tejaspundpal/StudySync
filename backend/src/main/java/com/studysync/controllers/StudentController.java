@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.studysync.dto.LoginDTO;
@@ -37,13 +38,23 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 	
-	@PostMapping("/register")
-	public ResponseEntity<Student> saveStudent(@RequestBody StudentDTO studentDTO) {
-	    Student student = this.studentService.addStudent(studentDTO);
-	    return new ResponseEntity<>(student, HttpStatus.CREATED);
-	}
+		@PostMapping("/register")
+		public ResponseEntity<String> saveStudent(@RequestBody StudentDTO studentDTO) {
+	    	this.studentService.addStudent(studentDTO);
+	    	return ResponseEntity.ok("OTP sent to email. Please verify to complete registration.");
+		}
 	
-	 @PostMapping("/login")
+		@PostMapping("/verify")
+		public ResponseEntity<String> verifyOtp(@RequestParam String email,@RequestParam String otp){
+			boolean isVerified = this.studentService.verifyOtp(email, otp);
+			if(isVerified) {
+				 return ResponseEntity.ok("Registration successful");
+	        } else {
+	            return ResponseEntity.status(400).body("Invalid OTP OR Enter Correct Email Id");
+	        }
+		}
+		
+	 	@PostMapping("/login")
 	    public ResponseEntity<?> loginStudent(@RequestBody LoginDTO loginDTO, HttpServletRequest request) {
 	        LoginMessage loginMessage = this.studentService.loginStudent(loginDTO);
 	        if (loginMessage.isStatus()) {

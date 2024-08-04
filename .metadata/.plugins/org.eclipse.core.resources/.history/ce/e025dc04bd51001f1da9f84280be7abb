@@ -1,0 +1,10 @@
+package com.studysync.services;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class OTPService {
+
+	@Autowired
+	private JavaMailSender mailSender;
+}

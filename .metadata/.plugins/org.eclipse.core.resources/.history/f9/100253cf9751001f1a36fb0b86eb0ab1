@@ -1,0 +1,9 @@
+package com.studysync.repos;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.studysync.entities.OTPVerification;
+
+public interface OTPVerificationRepository extends JpaRepository<OTPVerification, Integer> {
+
+}

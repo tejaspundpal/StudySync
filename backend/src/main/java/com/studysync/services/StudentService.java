@@ -12,7 +12,9 @@ import com.studysync.services.payload.response.LoginMessage;
 @Service
 public interface StudentService {
 
-	Student addStudent(StudentDTO studentDTO);
+	void addStudent(StudentDTO studentDTO);
+	
+	boolean verifyOtp(String email, String otp);
 
 	LoginMessage loginStudent(LoginDTO loginDTO);
 
