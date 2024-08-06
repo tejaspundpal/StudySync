@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.studysync.dto.LoginDTO;
 import com.studysync.dto.TeacherDTO;
+import com.studysync.entities.OTPVerificationTeacher;
 import com.studysync.entities.Teacher;
+import com.studysync.exceptions.TeacherAlreadyRegisteredException;
+import com.studysync.repos.OTPVerificationTeacherRepository;
 import com.studysync.repos.TeacherRepository;
+import com.studysync.services.OTPService;
 import com.studysync.services.TeacherService;
 import com.studysync.services.payload.response.LoginMessage;
 
@@ -22,23 +26,58 @@ public class TeacherImpl implements TeacherService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private OTPVerificationTeacherRepository otpVerificationTeacherRepo;
+	
+	@Autowired
+	private OTPService otpService;
+	
 	@Override
-	public Teacher addTeacher(TeacherDTO teacherDTO) {
+	public void addTeacher(TeacherDTO teacherDTO) {
 
-		Teacher teacher = new Teacher(
-				teacherDTO.getTid(),
-				teacherDTO.getFirstname(),
-				teacherDTO.getLastname(),
-				teacherDTO.getPhonenumber(),
-				teacherDTO.getEmail(),
-				this.passwordEncoder.encode(teacherDTO.getPassword()),
-			    teacherDTO.getImgUrl(),
-			    teacherDTO.getNotes()
-				);
+		Optional<Teacher> existingTeacher = teacherRepo.findByTid(teacherDTO.getTid());
 		
-		this.teacherRepo.save(teacher);
+		if(existingTeacher.isPresent()){
+			throw new TeacherAlreadyRegisteredException("Teacher is already registered with entered tid");
+		}
 		
-		return teacher;
+		String otp = otpService.generateOTP();
+		otpService.sendEmail(teacherDTO.getEmail(), otp);
+		
+		OTPVerificationTeacher otpVerificationTeacher = new OTPVerificationTeacher();
+		
+		otpVerificationTeacher.setEmail(teacherDTO.getEmail());
+		otpVerificationTeacher.setOtp(otp);
+		otpVerificationTeacher.setTid(teacherDTO.getTid());
+		otpVerificationTeacher.setFirstname(teacherDTO.getFirstname());
+		otpVerificationTeacher.setLastname(teacherDTO.getLastname());
+		otpVerificationTeacher.setPhonenumber(teacherDTO.getPhonenumber());
+		otpVerificationTeacher.setPassword(passwordEncoder.encode(teacherDTO.getPassword()));
+		otpVerificationTeacher.setImgUrl(teacherDTO.getImgUrl());
+		
+		otpVerificationTeacherRepo.save(otpVerificationTeacher);
+	}
+	
+	@Override
+	public boolean verifyOtp(String email,String otp) {
+		OTPVerificationTeacher otpVerificationTeacher = otpVerificationTeacherRepo.findByEmailAndOtp(email, otp);
+		
+		if(otpVerificationTeacher != null) {
+			Teacher teacher = new Teacher(
+					otpVerificationTeacher.getTid(),
+					otpVerificationTeacher.getFirstname(),
+					otpVerificationTeacher.getLastname(),
+					otpVerificationTeacher.getPhonenumber(),
+					otpVerificationTeacher.getEmail(),
+					otpVerificationTeacher.getPassword(),
+					otpVerificationTeacher.getImgUrl()
+					);
+			teacherRepo.save(teacher);
+			otpVerificationTeacherRepo.delete(otpVerificationTeacher);
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override

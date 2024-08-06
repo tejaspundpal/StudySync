@@ -12,7 +12,9 @@ import com.studysync.services.payload.response.LoginMessage;
 @Service
 public interface TeacherService {
 
-	Teacher addTeacher(TeacherDTO teacherDTO);
+	void addTeacher(TeacherDTO teacherDTO);
+	
+	boolean verifyOtp(String email,String otp);
 	
 	LoginMessage loginTeacher(LoginDTO loginDTO);
 	

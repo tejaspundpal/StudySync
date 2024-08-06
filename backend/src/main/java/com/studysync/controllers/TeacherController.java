@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.studysync.dto.LoginDTO;
@@ -33,9 +34,19 @@ public class TeacherController {
 	private TeacherService teacherService;
 	
 	@PostMapping("/register")
-	public ResponseEntity<Teacher>saveTeacher(@RequestBody TeacherDTO teacherDTO){
-		Teacher teacher = this.teacherService.addTeacher(teacherDTO);
-		return new ResponseEntity<>(teacher,HttpStatus.CREATED);
+	public ResponseEntity<String>saveTeacher(@RequestBody TeacherDTO teacherDTO){
+		this.teacherService.addTeacher(teacherDTO);
+    	return ResponseEntity.ok("OTP sent to email. Please verify to complete registration.");
+	}
+	
+	@PostMapping("/verify")
+	public ResponseEntity<String> verifyOtp(@RequestParam String email,@RequestParam String otp){
+		boolean isVerified = this.teacherService.verifyOtp(email, otp);
+		if(isVerified) {
+			 return ResponseEntity.ok("Registration successful");
+		}else {
+            return ResponseEntity.status(400).body("Invalid OTP OR Enter Correct Email Id");
+		}
 	}
 	
 	 @PostMapping("/login")

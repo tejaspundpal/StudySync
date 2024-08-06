@@ -13,4 +13,5 @@ import com.studysync.entities.Teacher;
 public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
 	Optional<Teacher> findOneByEmailAndPassword(String email,String password);
 	Teacher findByEmail(String email);
+	Optional<Teacher> findByTid(String tid);
 }
