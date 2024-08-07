@@ -35,7 +35,7 @@ const UploadNotes = () => {
     // console.log(formData);
         const data = new FormData();
         data.append('notes', formData.notes);
-        data.append('teacherName', formData.teacherName);
+        data.append('teacherName', `${ teacher && teacher.firstname} ${teacher && teacher.lastname}`);
         data.append('subject', formData.subject);
         data.append('year', formData.year);
         data.append('description', formData.description);
@@ -74,7 +74,7 @@ const UploadNotes = () => {
               type="text"
               id="teacherName"
               name="teacherName"
-              value={`${ teacher && teacher.firstname}${teacher && teacher.lastname}`}
+              value={`${ teacher && teacher.firstname} ${teacher && teacher.lastname}`}
               className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:border-purple-500"
               disabled
             />

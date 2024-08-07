@@ -46,29 +46,30 @@ const TeacherRegister = () => {
     }
 
     try {
-        const formData = {...userReg};
-        // console.log('FormData :',stringify(formData));
-        const response = await axios.post('http://localhost:8182/api/teacher/register', formData);
-        // console.log('Registration successful', response.data);
-        toast.success('Registration successful !')
+      const formData = { ...userReg };
+      // console.log('FormData :',stringify(formData));
+      const response = await axios.post('http://localhost:8182/api/teacher/register', formData);
+      // console.log('Registration successful', response.data);
+      setOtpSent(true);
+      toast.success("OTP sent to email. Please verify to complete registration.")
     } catch (error) {
-        console.error('Registration failed', error);
-        toast.error('Registration failed. Please try again.');
+      console.error('Registration failed', error);
+      toast.error('Registration failed. Please try again.');
     }
-};
+  };
 
-const handleVerifyOtp = async(e) => {
-  e.preventDefault();
-  try {
-    const response = await axios.post('http://localhost:8182/api/teacher/verify',null,{
-      params: {email:userReg.email, otp}
-    });
-    toast.success("Registration successful!")
-    navigate('/teacher-login')
-  } catch (error) {
-    toast.error('Invalid OTP OR Enter Correct Email Id.');
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:8182/api/teacher/verify', null, {
+        params: { email: userReg.email, otp }
+      });
+      toast.success("Registration successful!")
+      navigate('/teacher-login')
+    } catch (error) {
+      toast.error('Invalid OTP OR Enter Correct Email Id.');
+    }
   }
-}
 
   return (
     <section className="bg-white">
@@ -81,51 +82,51 @@ const handleVerifyOtp = async(e) => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create an Account
             </h1>
-            { !otpSent ? 
-            (<form className="space-y-4 md:space-y-6" action="#" onSubmit={handleRegister}>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
-                  <input type="text" id="firstname" name="firstname" value={userReg.firstName} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter your first name" required="" />
+            {!otpSent ?
+              (<form className="space-y-4 md:space-y-6" action="#" onSubmit={handleRegister}>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+                    <input type="text" id="firstname" name="firstname" value={userReg.firstName} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter your first name" required="" />
+                  </div>
+                  <div>
+                    <label htmlFor="lastName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+                    <input type="text" id="lastName" name="lastname" value={userReg.lastname} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter your last name" />
+                  </div>
+                  <div>
+                    <label htmlFor="id" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teacher Id No.</label>
+                    <input type="text" id="tid" name="tid" value={userReg.tid} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter your Id number" />
+                  </div>
+                  <div>
+                    <label htmlFor="phonenumber" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mobile Number</label>
+                    <input type="text" id="phonenumber" name="phonenumber" value={userReg.phonenumber} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter your mobile number" />
+                  </div>
+                  <div>
+                    <label htmlFor="mobileNo" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                    <input type="email" id="email" name="email" value={userReg.email} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter your email " />
+                  </div>
+                  <div>
+                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                    <input type="password" id="password" name="password" value={userReg.password} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter your password" />
+                  </div>
+                  <div>
+                    <label htmlFor="confirmPassword" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="cpassword" value={userReg.cpassword} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Confirm your password" />
+                  </div>
                 </div>
-                <div>
-                  <label htmlFor="lastName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
-                  <input type="text" id="lastName" name="lastname" value={userReg.lastname} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter your last name" />
-                </div>
-                <div>
-                  <label htmlFor="id" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teacher Id No.</label>
-                  <input type="text" id="tid" name="tid" value={userReg.tid} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter your Id number" />
-                </div>
-                <div>
-                  <label htmlFor="phonenumber" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mobile Number</label>
-                  <input type="text" id="phonenumber" name="phonenumber" value={userReg.phonenumber} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter your mobile number" />
-                </div>
-                <div>
-                  <label htmlFor="mobileNo" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                  <input type="email" id="email" name="email" value={userReg.email} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter your email " />
-                </div>
-                <div>
-                  <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                  <input type="password" id="password" name="password" value={userReg.password} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter your password" />
-                </div>
-                <div>
-                  <label htmlFor="confirmPassword" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
-                  <input type="password" id="confirmPassword" name="cpassword" value={userReg.cpassword} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Confirm your password" />
-                </div>
-              </div>
-              <button type="submit" className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800" >Create an account</button>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Already have an account? <NavLink to="/teacher-login" className="font-medium text-purple-600 hover:underline dark:text-purple-500">Sign In here</NavLink>
-              </p>
-            </form>) : (
+                <button type="submit" className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800" >Create an account</button>
+                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                  Already have an account? <NavLink to="/teacher-login" className="font-medium text-purple-600 hover:underline dark:text-purple-500">Sign In here</NavLink>
+                </p>
+              </form>) : (
                 <form className="space-y-4 md:space-y-6" onSubmit={handleVerifyOtp}>
-                <div>
-                  <label htmlFor="otp" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">OTP</label>
-                  <input type="text" id="otp" name="otp" value={otp} onChange={(e) => setOtp(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter OTP" required />
-                </div>
-                <button type="submit" className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Verify OTP</button>
+                  <div>
+                    <label htmlFor="otp" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">OTP</label>
+                    <input type="text" id="otp" name="otp" value={otp} onChange={(e) => setOtp(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Enter OTP" required />
+                  </div>
+                  <button type="submit" className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Verify OTP</button>
                 </form>
-            )}
+              )}
           </div>
         </div>
       </div>

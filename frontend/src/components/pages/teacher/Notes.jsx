@@ -31,7 +31,7 @@ const Notes = (props) => {
         }
     };
 
-    const notesOfLoggedTeacher = notes && notes.filter(note => note.teacherName === `${teacher && teacher.firstname}${teacher && teacher.lastname}`);
+    const notesOfLoggedTeacher = notes && notes.filter(note => note.teacherName === `${teacher && teacher.firstname} ${teacher && teacher.lastname}`);
     console.log(notesOfLoggedTeacher);
     const filteredNotes = notesOfLoggedTeacher && notesOfLoggedTeacher.filter(note => note.year === notesYear);
 
