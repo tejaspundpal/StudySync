@@ -16,4 +16,6 @@ public interface EventService {
 	List<Event> allEvents();
 	
 	Optional<Event> getEventById(int id);
+	
+	boolean deleteEventById(int id);
 }

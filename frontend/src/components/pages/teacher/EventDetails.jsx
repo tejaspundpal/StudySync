@@ -37,6 +37,7 @@ const EventDetails = () => {
         <>
             <TeacherNavbar />
             <div className="min-h-screen bg-gray-100 flex flex-col items-center p-4">
+            <h1 className='text-3xl font-medium text-gray-600 mb-6 mt-1'>Event Details</h1>
                 {eventDetails ? (
                     <div className="w-full max-w-4xl bg-white shadow-md rounded-lg p-6 shadow-purple-300">
                         <h1 className="text-2xl font-bold mb-4">{eventDetails.title}</h1>

@@ -11,6 +11,14 @@ public class EventDTO {
 	private String time;
 	private String location;
 	private String year;
+	private String teacherName;
+	
+	public String getTeacherName() {
+		return teacherName;
+	}
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
 	public int getId() {
 		return id;
 	}
@@ -61,6 +69,8 @@ public class EventDTO {
 		this.time = time;
 		this.location = location;
 		this.year = year;
+		this.teacherName = teacherName;
+
 	}
 	public EventDTO() {
 		super();
@@ -69,7 +79,7 @@ public class EventDTO {
 	@Override
 	public String toString() {
 		return "EventDTO [id=" + id + ", title=" + title + ", description=" + description + ", date=" + date + ", time="
-				+ time + ", location=" + location + ", year=" + year + "]";
+				+ time + ", location=" + location + ", year=" + year + ", teacherName=" + teacherName + "]";
 	}
 	
 	

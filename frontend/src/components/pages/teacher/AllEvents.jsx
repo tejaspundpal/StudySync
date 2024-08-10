@@ -5,29 +5,17 @@ import TeacherNavbar from './TeacherNavbar';
 import Footer from '../../Footer';
 import 'react-calendar/dist/Calendar.css';
 import { NavLink, useParams } from 'react-router-dom';
+import useAllEvents from '../../../utils/useAllEvents';
 
 const AllEvents = () => {
   const{id} = useParams();
-  const [events, setEvents] = useState([]);
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-     try {
-        const response = await axios.get('http://localhost:8182/api/event/all-events');
-        setEvents(response.data);
-     } catch (error) {
-        console.error(error);
-        toast.error('Something Went Wrong')
-     }
-    }
-    fetchEvents();
-  }, []);
+  const {events,loading} = useAllEvents();
 
   const tileContent = ({ date, view }) => {
-    const dayEvents = events.filter(event => new Date(event.date).toDateString() === date.toDateString());
+    const dayEvents = events && events.filter(event => new Date(event.date).toDateString() === date.toDateString());
     return (
       <div className="flex flex-col items-center">
-        {dayEvents.map(event => (
+        {dayEvents && dayEvents.map(event => (
           <div key={event.id} className="text-sm p-1">
             <NavLink to={`/teacher/events/all-events/details/${event.id}`}><strong>{event.title}</strong></NavLink>
           </div>

@@ -32,6 +32,7 @@ import StudentAllEvents from "./components/pages/student/StudentAllEvents";
 import StudentEventDetails from "./components/pages/student/StudentEventDetails";
 import TeacherProfile from "./components/pages/teacher/TeacherProfile";
 import Webd from "./components/pages/student/Webd";
+import MyEvents from "./components/pages/teacher/MyEvents";
 
 function App() {
 
@@ -66,6 +67,7 @@ function App() {
           <Route path="/teacher/events/:id" element={<TeacherEvent/>} />
           <Route path="/teacher/events/add-event/:id" element={<AddEvent/>} />
           <Route path="/teacher/events/all-events/:id" element={<AllEvents/>} />
+          <Route path="/teacher/events/my-events/:id" element={<MyEvents/>} />
           <Route path="/teacher/events/all-events/details/:id" element={<EventDetails/>} />
           <Route path="/student/events/:id" element={<StudentAllEvents/>} />
           <Route path="/student/events/details/:id" element={<StudentEventDetails/>} />

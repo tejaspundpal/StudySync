@@ -26,6 +26,7 @@ public class EventImpl implements EventService {
 		event.setTime(eventDTO.getTime());
 		event.setLocation(eventDTO.getLocation());
 		event.setYear(eventDTO.getYear());
+		event.setTeacherName(eventDTO.getTeacherName());
 		
 		return eventRepo.save(event);
 	}
@@ -40,6 +41,16 @@ public class EventImpl implements EventService {
 	public Optional<Event> getEventById(int id) {
 		Optional<Event> event = eventRepo.findById(id);
 		return event;
+	}
+
+	@Override
+	public boolean deleteEventById(int id) {
+		Optional<Event> event = eventRepo.findById(id);
+		if(event.isPresent()) {
+			eventRepo.deleteById(id);
+			return true;
+		}
+		return false;
 	}
 
 }

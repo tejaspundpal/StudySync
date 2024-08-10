@@ -27,6 +27,16 @@ public class Event {
 	private String location;
 	
 	private String year;
+	
+	private String teacherName;
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
 
 	public int getId() {
 		return id;
@@ -84,7 +94,7 @@ public class Event {
 		this.year = year;
 	}
 
-	public Event(String title, String description, LocalDate date, String time, String location, String year) {
+	public Event(String title, String description, LocalDate date, String time, String location, String year, String teacherName) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -92,6 +102,7 @@ public class Event {
 		this.time = time;
 		this.location = location;
 		this.year = year;
+		this.teacherName = teacherName;
 	}
 
 	public Event() {
@@ -102,7 +113,7 @@ public class Event {
 	@Override
 	public String toString() {
 		return "Event [id=" + id + ", title=" + title + ", description=" + description + ", date=" + date + ", time="
-				+ time + ", location=" + location + ", year=" + year + "]";
+				+ time + ", location=" + location + ", year=" + year + ", teacherName=" + teacherName + "]";
 	}
 	
 	

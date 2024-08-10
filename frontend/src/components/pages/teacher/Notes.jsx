@@ -27,7 +27,6 @@ const Notes = (props) => {
             toast.success("File Deleted Successfully !")
         } catch (error) {
             console.error("There was an error deleting the note!", error);
-            toast.error("Something went wrong")
         }
     };
 

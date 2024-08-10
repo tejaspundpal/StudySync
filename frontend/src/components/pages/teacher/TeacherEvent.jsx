@@ -22,6 +22,11 @@ const TeacherEvent = () => {
                             All Events
                         </NavLink>
                     </p>
+                    <p className='mt-2'>
+                        <NavLink to={`/teacher/events/my-events/${id}`} className="nav-link text-purple-600 hover:text-purple-800">
+                            My Events
+                        </NavLink>
+                    </p>
                 </div>
             </section>
             <Footer />

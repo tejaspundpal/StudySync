@@ -10,7 +10,7 @@ export default function TeacherNavbar(props) {
     name: 'Tejas',
     email: 'tejas@gmail.com',
     imageUrl:
-      'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fuser-icon&psig=AOvVaw0yilBJh2aJauC0206tztw3&ust=1718517770390000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCND92tr33IYDFQAAAAAdAAAAABAE',
+      'https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg',
   }
   const navigation = [
     { name: 'Dashboard', href: `/teacher/dashboard/${props.id}`, current: true },
@@ -20,7 +20,7 @@ export default function TeacherNavbar(props) {
   ]
   const userNavigation = [
     { name: 'Your Profile', href: `/teacher/profile/${props.id}` },
-    { name: 'Sign out', href: '/logout' },
+    { name: 'Sign out', href: '/' },
   ]
   
   function classNames(...classes) {
