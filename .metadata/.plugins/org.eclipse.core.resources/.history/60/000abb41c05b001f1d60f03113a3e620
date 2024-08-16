@@ -1,0 +1,5 @@
+package com.studysync.controllers;
+
+public class ThreadController {
+
+}

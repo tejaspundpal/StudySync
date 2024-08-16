@@ -1,5 +1,0 @@
-package com.studysync.exceptions;
-
-public class TeacherAlreadyRegisteredException {
-
-}

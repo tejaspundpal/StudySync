@@ -1,0 +1,5 @@
+package com.studysync.services.impl;
+
+public class ThreadImpl {
+
+}
