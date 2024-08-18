@@ -33,6 +33,9 @@ import StudentEventDetails from "./components/pages/student/StudentEventDetails"
 import TeacherProfile from "./components/pages/teacher/TeacherProfile";
 import Webd from "./components/pages/student/Webd";
 import MyEvents from "./components/pages/teacher/MyEvents";
+import ThreadList from "./components/pages/student/Thread/ThreadList";
+import CreateThread from "./components/pages/student/Thread/CreateThread";
+import MyThreads from "./components/pages/student/Thread/MyThreads";
 
 function App() {
 
@@ -71,6 +74,9 @@ function App() {
           <Route path="/teacher/events/all-events/details/:id" element={<EventDetails/>} />
           <Route path="/student/events/:id" element={<StudentAllEvents/>} />
           <Route path="/student/events/details/:id" element={<StudentEventDetails/>} />
+          <Route path="/student/discussion/:id" element={<ThreadList/>} />
+          <Route path="/student/discussion/create-thread/:id" element={<CreateThread/>} />
+          <Route path="/student/discussion/my-threads/:id" element={<MyThreads/>} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

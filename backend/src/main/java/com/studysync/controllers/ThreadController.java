@@ -25,7 +25,7 @@ import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true", allowedHeaders = "*")
-@RequestMapping("/api/thread")
+@RequestMapping("/api/threads")
 public class ThreadController {
 
 	@Autowired
@@ -46,7 +46,7 @@ public class ThreadController {
 		return ResponseEntity.of(Optional.of(allThreads));
 	}
 	
-	@GetMapping("/details/{id}")
+	@GetMapping("/thread/{id}")
 	public ResponseEntity<Thread> getThreadById(@PathVariable Long id) throws ChangeSetPersister.NotFoundException{
 		Optional<Thread> thread = this.threadService.getThreadById(id);
 		if(thread.isPresent()) {
@@ -56,7 +56,7 @@ public class ThreadController {
 		}
 	}
 	
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Void> deleteThreadById(@PathVariable Long id){
 		boolean isDeleted = this.threadService.delteThreadById(id);
 		if(isDeleted) {

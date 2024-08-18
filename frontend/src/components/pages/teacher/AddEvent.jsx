@@ -5,9 +5,11 @@ import Footer from '../../Footer'
 import { stringify } from 'flatted';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
+import useTeacherDetails from '../../../utils/useTeacherDetails';
 
 const AddEvent = () => {
     const { id } = useParams();
+    const teacher = useTeacherDetails(id);
 
     const [event, setEvent] = useState({
         title: '',
@@ -15,7 +17,8 @@ const AddEvent = () => {
         date: '',
         time: '',
         location: '',
-        year: ''
+        year: '',
+        teacherName: ''
     });
 
     const resetForm = () => {
@@ -25,21 +28,22 @@ const AddEvent = () => {
             date: '',
             time: '',
             location: '',
-            year: ''
+            year: '',
+            teacherName: ''
         });
     };
 
     const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        // console.log(name,value);
         setEvent({ ...event, [name]: value });
     };
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const formData = { ...event };
+            const teacherName = `${teacher?.firstname} ${teacher?.lastname}`;
+            const formData = { ...event, teacherName };
             const response = await axios.post('http://localhost:8182/api/event/create-event', formData);
             toast.success("Event Added Successfully !")
             // console.log("FormData : ", response.data);

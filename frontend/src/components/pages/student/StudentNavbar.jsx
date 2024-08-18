@@ -20,6 +20,7 @@ export default function StudentNavbar(props) {
     { name: 'Notes', href: `/student/notes/${props.id}`, current: false },
     { name: 'Quiz', href: `/student/quiz/${props.id}`, current: false },
     { name: 'Event', href: `/student/events/${props.id}`, current: false },
+    { name: 'Discussion', href: `/student/discussion/${props.id}`, current: false },
   ];
 
   const userNavigation = [

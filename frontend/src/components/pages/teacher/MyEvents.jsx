@@ -13,7 +13,7 @@ const MyEvents = () => {
     const teacher = useTeacherDetails(id);
 
     const myEvents = events && events.filter(event => event.teacherName === `${teacher && teacher.firstname} ${teacher && teacher.lastname}`)
-    console.log(myEvents);
+    // console.log(myEvents);
 
     const handleDelete = async(id) => {
         try {

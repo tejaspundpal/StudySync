@@ -17,6 +17,7 @@ export default function TeacherNavbar(props) {
     { name: 'Notes', href: `/teacher/notes/${props.id}`, current: false },
     { name: 'Quiz', href: `/teacher/quiz/${props.id}`, current: false },
     { name: 'Events', href: `/teacher/events/${props.id}`, current: false },
+    // { name: 'Discussion', href: `/teacher/discussion/${props.id}`, current: false },
   ]
   const userNavigation = [
     { name: 'Your Profile', href: `/teacher/profile/${props.id}` },

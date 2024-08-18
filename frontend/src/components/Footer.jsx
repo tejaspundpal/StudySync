@@ -78,7 +78,7 @@ export default function Footer() {
       <a
         className="text-neutral-800"
         href=""
-      > StudySync</a>
+      > Tejas Pundpal</a>
     </div>
   </footer>
   );

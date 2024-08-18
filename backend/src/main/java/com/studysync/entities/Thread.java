@@ -10,6 +10,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "THREAD")
 public class Thread {
@@ -20,12 +22,13 @@ public class Thread {
 	
 	private String title;
 	
-	@Column(columnDefinition = "TEXT")
+	@Column(length = 1000)
 	private String content;
 	
 	private String createdBy;
 	
 	@OneToMany(mappedBy = "thread", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
 	private List<Comment> comments = new ArrayList<>();
 	
 	public Thread() {
