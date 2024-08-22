@@ -8,7 +8,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import useAllEvents from '../../../utils/useAllEvents';
 
 const AllEvents = () => {
-  const{id} = useParams();
+  const {id} = useParams();
   const {events,loading} = useAllEvents();
 
   const tileContent = ({ date, view }) => {
@@ -17,7 +17,7 @@ const AllEvents = () => {
       <div className="flex flex-col items-center">
         {dayEvents && dayEvents.map(event => (
           <div key={event.id} className="text-sm p-1">
-            <NavLink to={`/teacher/events/all-events/details/${event.id}`}><strong>{event.title}</strong></NavLink>
+            <NavLink to={`/teacher/events/all-events/details/${event.id}/${id}`}><strong>{event.title}</strong></NavLink>
           </div>
         ))}
       </div>

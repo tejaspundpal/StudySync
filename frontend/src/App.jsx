@@ -71,9 +71,9 @@ function App() {
           <Route path="/teacher/events/add-event/:id" element={<AddEvent/>} />
           <Route path="/teacher/events/all-events/:id" element={<AllEvents/>} />
           <Route path="/teacher/events/my-events/:id" element={<MyEvents/>} />
-          <Route path="/teacher/events/all-events/details/:id" element={<EventDetails/>} />
+          <Route path="/teacher/events/all-events/details/:eventid/:id" element={<EventDetails/>} />
           <Route path="/student/events/:id" element={<StudentAllEvents/>} />
-          <Route path="/student/events/details/:id" element={<StudentEventDetails/>} />
+          <Route path="/student/events/details/:eventid/:id" element={<StudentEventDetails/>} />
           <Route path="/student/discussion/:id" element={<ThreadList/>} />
           <Route path="/student/discussion/create-thread/:id" element={<CreateThread/>} />
           <Route path="/student/discussion/my-threads/:id" element={<MyThreads/>} />

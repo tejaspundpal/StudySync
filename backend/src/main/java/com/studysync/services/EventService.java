@@ -3,6 +3,7 @@ package com.studysync.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import com.studysync.dto.EventDTO;
@@ -18,4 +19,6 @@ public interface EventService {
 	Optional<Event> getEventById(int id);
 	
 	boolean deleteEventById(int id);
+	
+	Event updateEvent(int id,Event event) throws ChangeSetPersister.NotFoundException;
 }

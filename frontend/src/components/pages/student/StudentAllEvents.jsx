@@ -28,7 +28,7 @@ const StudentAllEvents = () => {
       <div className="flex flex-col items-center">
         {dayEvents.map(event => (
           <div key={event.id} className="text-sm p-1">
-            <NavLink to={`/student/events/details/${event.id}`}><strong>{event.title}</strong></NavLink>
+            <NavLink to={`/student/events/details/${event.id}/${id}`}><strong>{event.title}</strong></NavLink>
           </div>
         ))}
       </div>

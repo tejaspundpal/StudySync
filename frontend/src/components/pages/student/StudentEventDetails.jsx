@@ -6,12 +6,12 @@ import StudentNavbar from './StudentNavbar';
 
 const StudentEventDetails = () => {
     const [eventDetails, setEventDetails] = useState(null);
-    const { id } = useParams();
+    const { eventid,id } = useParams();
 
     useEffect(() => {
         const fetchEventById = async () => {
             try {
-                const response = await axios.get(`http://localhost:8182/api/event/details/${id}`);
+                const response = await axios.get(`http://localhost:8182/api/event/details/${eventid}`);
                 setEventDetails(response.data);
             } catch (error) {
                 console.error(error);
@@ -35,7 +35,7 @@ const StudentEventDetails = () => {
 
     return (
         <>
-            <StudentNavbar />
+            <StudentNavbar id = {id}/>
             <div className="min-h-screen bg-gray-100 flex flex-col items-center p-4">
                 <h1 className='text-3xl font-medium text-gray-600 mb-6 mt-1'>Event Details</h1>
                 {eventDetails ? (
