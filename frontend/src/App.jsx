@@ -36,6 +36,7 @@ import MyEvents from "./components/pages/teacher/MyEvents";
 import ThreadList from "./components/pages/student/Thread/ThreadList";
 import CreateThread from "./components/pages/student/Thread/CreateThread";
 import MyThreads from "./components/pages/student/Thread/MyThreads";
+import EventReshedule from "./components/pages/teacher/EventReshedule";
 
 function App() {
 
@@ -71,6 +72,7 @@ function App() {
           <Route path="/teacher/events/add-event/:id" element={<AddEvent/>} />
           <Route path="/teacher/events/all-events/:id" element={<AllEvents/>} />
           <Route path="/teacher/events/my-events/:id" element={<MyEvents/>} />
+          <Route path="/teacher/events/reshedule/:eventid/:id" element={<EventReshedule/>} />
           <Route path="/teacher/events/all-events/details/:eventid/:id" element={<EventDetails/>} />
           <Route path="/student/events/:id" element={<StudentAllEvents/>} />
           <Route path="/student/events/details/:eventid/:id" element={<StudentEventDetails/>} />

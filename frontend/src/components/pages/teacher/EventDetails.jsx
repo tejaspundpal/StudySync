@@ -18,7 +18,7 @@ const EventDetails = () => {
             }
         };
         fetchEventById();
-    }, [id]);
+    }, [eventid]);
 
     const getYearText = (year) => {
         switch (year) {

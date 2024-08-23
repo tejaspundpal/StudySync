@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import TeacherNavbar from './TeacherNavbar'
 import Footer from '../../Footer'
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import useAllEvents from '../../../utils/useAllEvents'
 import useTeacherDetails from '../../../utils/useTeacherDetails'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { MdOutlineEditNotifications } from "react-icons/md";
 
 const MyEvents = () => {
     const { id } = useParams();
@@ -42,6 +43,7 @@ const MyEvents = () => {
                                         <th className="py-3 px-4">Location</th>
                                         <th className="py-3 px-4">Year</th>
                                         <th className="py-3 px-4">Delete</th>
+                                        <th className="py-3 px-4">Reshedule</th>
                                     </tr>
                                 </thead>
                                 <tbody className="text-gray-700">
@@ -57,6 +59,9 @@ const MyEvents = () => {
                                                     Delete
                                                 </button>
                                             </td>
+                                            <td className="border-b py-3 px-4"><NavLink to={`/teacher/events/reshedule/${event.id}/${id}`}>
+                                            <MdOutlineEditNotifications className='size-7 ml-5' />
+                                            </NavLink></td>
                                         </tr>
                                     ))}
                                 </tbody>
