@@ -6,6 +6,8 @@ import Footer from '../../../Footer';
 import { useParams } from 'react-router-dom';
 import { FaComments } from "react-icons/fa";
 import useStudentDetails from '../../../../utils/UseStudentDetails';
+import { toast } from 'react-toastify';
+
 
 const MyThreads = () => {
     const { id } = useParams();
@@ -31,6 +33,7 @@ const MyThreads = () => {
         try {
             await axios.delete(`http://localhost:8182/api/threads/delete/${threadId}`);
             setThreads(prevThreads => prevThreads.filter(thread => thread.id !== threadId));
+            toast.success("Thread Deleted Successfully !");
         } catch (error) {
             console.error("Failed to delete the thread:", error);
         }

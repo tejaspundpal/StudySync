@@ -21,6 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.studysync.entities.Notes;
 import com.studysync.services.impl.NotesService;
 
+/**
+*
+* @author Tejas Pundpal
+*/
+
 @RestController
 @RequestMapping("/api/notes")
 @CrossOrigin(origins = "http://localhost:5173") 

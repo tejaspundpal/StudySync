@@ -23,6 +23,10 @@ import com.studysync.services.TeacherService;
 import com.studysync.services.payload.response.LoginMessage;
 
 import jakarta.servlet.http.HttpServletRequest;
+/**
+*
+* @author Tejas Pundpal
+*/
 
 
 @RestController

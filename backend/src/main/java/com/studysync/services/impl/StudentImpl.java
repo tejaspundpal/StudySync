@@ -20,6 +20,11 @@ import com.studysync.services.OTPService;
 import com.studysync.services.StudentService;
 import com.studysync.services.payload.response.LoginMessage;
 
+/**
+*
+* @author Tejas Pundpal
+*/
+
 @Service
 public class StudentImpl implements StudentService {
 

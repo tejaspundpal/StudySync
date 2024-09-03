@@ -55,7 +55,7 @@ const StudentRegister = () => {
       toast.success("OTP sent to email. Please verify to complete registration.")
     } catch (error) {
       if(error.response && error.response.status === 409){
-        toast.error("Student is already registered with entered PRN")
+        toast.error("Student is already registered with entered PRN or Email")
       }else{
       console.error('Registration failed', error);
       toast.error('Registration failed. Please try again.');

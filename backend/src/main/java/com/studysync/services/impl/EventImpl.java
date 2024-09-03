@@ -13,6 +13,11 @@ import com.studysync.entities.Event;
 import com.studysync.repos.EventRepository;
 import com.studysync.services.EventService;
 
+/**
+*
+* @author Tejas Pundpal
+*/
+
 @Service
 public class EventImpl implements EventService {
 

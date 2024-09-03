@@ -3,6 +3,7 @@ import axios from 'axios';
 import CommentCard from './CommentCard';
 import { useParams } from 'react-router-dom';
 import useStudentDetails from '../../../../utils/UseStudentDetails';
+import { toast } from 'react-toastify';
 
 const ThreadDetail = ({ thread }) => {
   const { id } = useParams();
@@ -14,6 +15,7 @@ const ThreadDetail = ({ thread }) => {
 
   const handleAddComment = async (e) => {
     e.preventDefault();
+    // console.log("okayy");
     setLoading(true);
     try {
       const newComment = {
@@ -21,7 +23,7 @@ const ThreadDetail = ({ thread }) => {
         createdBy: `${student?.firstname} ${student?.lastname}` 
       };
       const response = await axios.post(`http://localhost:8182/api/comments/thread/${thread.id}`, newComment);
-
+      toast.success("Comment Added Successfully !");
       setComments([...comments, response.data]);
       setCommentContent('');
     } catch (error) {
@@ -30,6 +32,16 @@ const ThreadDetail = ({ thread }) => {
       setLoading(false);
     }
   };
+
+  const handleDeleteComment = async(commentId) => {
+    try {
+      await axios.delete(`http://localhost:8182/api/comments/delete/${commentId}`);
+      setComments(prevComments => prevComments.filter(comment => comment.id !== commentId));
+      toast.success("Comment Deleted Successfully !");
+    } catch (error) {
+      console.error("Failed to delete the thread:", error);
+    }
+  }
 
   return (
     <div className="border rounded-lg shadow-lg p-6">
@@ -41,7 +53,7 @@ const ThreadDetail = ({ thread }) => {
 
       <h3 className="text-xl font-semibold mb-3">Comments:</h3>
       {comments.map(comment => (
-        <CommentCard key={comment.id} comment={comment} />
+        <CommentCard key={comment.id} comment={comment} student={student} onDelete={handleDeleteComment}/>
       ))}
 
       <form onSubmit={handleAddComment} className="mt-6">
